@@ -44,7 +44,7 @@
                                   <Component id="btnexit" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="txbaccount" max="32767" attributes="0"/>
-                              <Component id="txbpass" max="32767" attributes="0"/>
+                              <Component id="txtpass" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -68,7 +68,7 @@
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txbpass" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtpass" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cb_showpass" min="-2" max="-2" attributes="0"/>
@@ -127,7 +127,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txbaccount">
     </Component>
-    <Component class="javax.swing.JPasswordField" name="txbpass">
+    <Component class="javax.swing.JPasswordField" name="txtpass">
     </Component>
     <Component class="javax.swing.JButton" name="btnlogin">
       <Properties>

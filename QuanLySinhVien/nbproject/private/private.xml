@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Luxury/Documents/NetBeansProjects/QLSINHVIEN/QuanLySinhVien/src/Login/DTO_Login.java</file>
+            <file>file:/C:/Users/Luxury/Documents/NetBeansProjects/QLSINHVIEN/QuanLySinhVien/src/Login/BLL_Login.java</file>
+            <file>file:/C:/Users/Luxury/Documents/NetBeansProjects/QLSINHVIEN/QuanLySinhVien/src/Login/DatabaseConnection.java</file>
+            <file>file:/C:/Users/Luxury/Documents/NetBeansProjects/QLSINHVIEN/QuanLySinhVien/src/Login/DAL_Login.java</file>
+            <file>file:/C:/Users/Luxury/Documents/NetBeansProjects/QLSINHVIEN/QuanLySinhVien/src/View/fLogin.java</file>
+            <file>file:/C:/Users/Luxury/Documents/NetBeansProjects/QLSINHVIEN/QuanLySinhVien/database.properties</file>
+            <file>file:/C:/Users/Luxury/Documents/NetBeansProjects/QLSINHVIEN/QuanLySinhVien/src/View/fHome.java</file>
+        </group>
     </open-files>
 </project-private>
