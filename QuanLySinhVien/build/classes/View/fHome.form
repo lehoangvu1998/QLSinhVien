@@ -38,6 +38,11 @@
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; Gi&#x1ea3;ng Vi&#xea;n"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; Sinh vi&#xea;n"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuclass">
@@ -73,20 +78,20 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="66" red="99" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Sinh vi&#xea;n"/>
+            <Property name="text" type="java.lang.String" value="Tra c&#x1ee9;u"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="24" style="0"/>
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; sinh vi&#xea;n"/>
+                <Property name="text" type="java.lang.String" value="Tra c&#x1ee9;u sinh vi&#xea;n"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Th&#xe2;n nh&#xe2;n sinh vi&#xea;n"/>
+                <Property name="text" type="java.lang.String" value="Tra c&#x1ee9;u gi&#x1ea3;ng vi&#xea;n"/>
               </Properties>
             </MenuItem>
           </SubComponents>

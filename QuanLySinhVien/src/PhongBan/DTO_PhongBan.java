@@ -1,18 +1,18 @@
 package PhongBan;
 
 public class DTO_PhongBan {
-    private String maphongban;
+    private int maphongban;
     private String tenphongban;
 
-    public String getMaphongban() {
+    public int getMaphongban() {
         return maphongban;
     }
 
-    public void setMaphongban(String maphongban) {
+    public void setMaphongban(int maphongban) {
         this.maphongban = maphongban;
     }
 
-    public DTO_PhongBan(String maphongban, String tenphongban) {
+    public DTO_PhongBan(int maphongban, String tenphongban) {
         this.maphongban = maphongban;
         this.tenphongban = tenphongban;
     }

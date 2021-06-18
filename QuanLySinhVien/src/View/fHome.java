@@ -31,13 +31,14 @@ public class fHome extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         menuclass = new javax.swing.JMenu();
         menuclasss = new javax.swing.JMenuItem();
         menumonhoc = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         menuStudent = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         menuContact = new javax.swing.JMenu();
 
         jMenuItem3.setText("jMenuItem3");
@@ -62,6 +63,9 @@ public class fHome extends javax.swing.JFrame {
         jMenuItem4.setText("Quản lý Giảng Viên");
         menufunction.add(jMenuItem4);
 
+        jMenuItem10.setText("Quản lý Sinh viên");
+        menufunction.add(jMenuItem10);
+
         jMenuBar1.add(menufunction);
 
         menuclass.setForeground(new java.awt.Color(0, 102, 0));
@@ -80,14 +84,14 @@ public class fHome extends javax.swing.JFrame {
         jMenuBar1.add(menuclass);
 
         menuStudent.setForeground(new java.awt.Color(153, 102, 255));
-        menuStudent.setText("Sinh viên");
+        menuStudent.setText("Tra cứu");
         menuStudent.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
 
-        jMenuItem8.setText("Quản lý sinh viên");
-        menuStudent.add(jMenuItem8);
+        jMenuItem5.setText("Tra cứu sinh viên");
+        menuStudent.add(jMenuItem5);
 
-        jMenuItem9.setText("Thân nhân sinh viên");
-        menuStudent.add(jMenuItem9);
+        jMenuItem6.setText("Tra cứu giảng viên");
+        menuStudent.add(jMenuItem6);
 
         jMenuBar1.add(menuStudent);
 
@@ -128,12 +132,13 @@ public class fHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu menuContact;
     private javax.swing.JMenu menuStudent;
     private javax.swing.JMenu menuclass;

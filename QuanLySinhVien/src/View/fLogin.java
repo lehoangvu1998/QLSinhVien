@@ -1,16 +1,16 @@
 package View;
 
-import NhanVien.BLL_NhanVien;
-import NhanVien.DAL_NhanVien;
-import NhanVien.DTO_NhanVien;
+import DangNhap.BLL_DangNhap;
+import DangNhap.DAL_DangNhap;
+import DangNhap.DTO_DangNhap;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class fLogin extends javax.swing.JFrame {
 
-    DTO_NhanVien dto = new DTO_NhanVien();
-    DAL_NhanVien dal = new DAL_NhanVien();
-    BLL_NhanVien bll = new BLL_NhanVien();
+    DTO_DangNhap dto = new DTO_DangNhap();
+    DAL_DangNhap dal = new DAL_DangNhap();
+    BLL_DangNhap bll = new BLL_DangNhap();
 
     public fLogin() {
         initComponents();
@@ -56,7 +56,7 @@ public class fLogin extends javax.swing.JFrame {
         btnlogin.setText("Đăng nhập");
         btnlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnloginActionPerformed(evt);
+                DangNhap(evt);
             }
         });
 
@@ -132,16 +132,17 @@ public class fLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
-        dto.setManhanvien(txbaccount.getText());
+    private void DangNhap(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DangNhap
+        dto.setTaikhoan(txbaccount.getText());
         dto.setMatkhau(txtpass.getText());
-        if (dto.getManhanvien().isEmpty()) {
+
+        if (dto.getTaikhoan().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tài khoản không được để trống");
         } else if (dto.getMatkhau().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
         } else {
             if (bll.Login(dto)) {
-                int role = dal.getRole(dto.getManhanvien());// Cái này mới đúng nè role nó sẽ biết được manhanvien đó nằm ở role nào
+                int role = dal.getRole(dto.getTaikhoan());// Cái này mới đúng nè role nó sẽ biết được manhanvien đó nằm ở role nào
                 //Nếu mà manhanvien là 1 thì role là 0
                 if (role == 0) {
                     this.dispose();
@@ -164,7 +165,7 @@ public class fLogin extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_btnloginActionPerformed
+    }//GEN-LAST:event_DangNhap
 
     private void cb_showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_showpassActionPerformed
         if (cb_showpass.isSelected()) {
@@ -187,18 +188,19 @@ public class fLogin extends javax.swing.JFrame {
 
     private void txtpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpassKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            dto.setManhanvien(txbaccount.getText());
+            dto.setTaikhoan(txbaccount.getText());
             dto.setMatkhau(txtpass.getText());
-            if (dto.getManhanvien().isEmpty()) {
+            if (dto.getTaikhoan().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Tài khoản không được để trống");
             } else if (dto.getMatkhau().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
             } else {
                 if (bll.Login(dto)) {
-                    int role = dal.getRole(dto.getManhanvien());
+                    int role = dal.getRole(dto.getTaikhoan());
                     if (role == 0) {
                         this.dispose();
                         fHome.role = role;
+                        //frmPhongban.maphongban=maphongban
                         new fHome().setVisible(true);
                     }
                     if (role == 1) {

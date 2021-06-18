@@ -1,6 +1,8 @@
 package PhongBan;
 
 import clsdatabase.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,58 +10,52 @@ import javax.swing.JOptionPane;
 
 public class DAL_PhongBan {
 
-    public static ResultSet rs = null;
-    public static DatabaseConnection db = null;
+    private ResultSet rs = null;
+    private DatabaseConnection db = null;
+    private Connection con = null;
+    private PreparedStatement ps = null;
 
     public ArrayList<DTO_PhongBan> GetPhongbanList() {
         ArrayList<DTO_PhongBan> listphongban = new ArrayList<>();
-        String sql = " select * from PHONGBAN";
+        String sql = " select MAPHONGBAN, TENPHONGBAN from PHONGBAN";
         try {
-            DatabaseConnection dbn = new DatabaseConnection();
-            dbn.getConnection();
-            rs = dbn.ExcuteQueryGetTable(sql);
-            DTO_PhongBan dto;
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                dto = new DTO_PhongBan(rs.getString("MAPHONGBAN"), rs.getString("TENPHONGBAN"));
+                DTO_PhongBan dto = new DTO_PhongBan();
+                dto.setMaphongban(rs.getInt("MAPHONGBAN"));
+                dto.setTenphongban(rs.getString("TENPHONGBAN"));
                 listphongban.add(dto);
             }
-            return listphongban;
         } catch (SQLException ex) {
         }
-        return null;
+        return listphongban;
     }
 
-    public void Insert(String tenphongban) {
+    public int insertPhongban(int maphongban, String tenphongban) {
+        int result = 0;
+        String sql = "insert into PHONGBAN values(?, ?)";
         try {
-            String sql = "insert into PHONGBAN values('" + tenphongban + "')";
-            DatabaseConnection cv = new DatabaseConnection();
-            cv.getConnection();
-            cv.ExcuteQueryDB(sql);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra ");
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, maphongban);
+            ps.setString(2, tenphongban);
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra");
         }
+        return result;
     }
 
-    public void Update(String maphongban, String tenphongban) {
-        try {
-            String sql = "Update PHONGBAN set TENPHONGBAN=N'" + tenphongban + "' where MAPHONGBAN ='" + maphongban + "'";
-            DatabaseConnection cv = new DatabaseConnection();
-            cv.getConnection();
-            cv.ExcuteQueryDB(sql);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,  " Cập nhật không thành công ");
-        }
+    public void Update(int maphongban, String tenphongban) {
+
     }
-    
-    public void Delete (String maphongban) {
-        try {
-            String Sql = "Delete from PHONGBAN where MAPHONGBAN='" + maphongban + "'";
-            DatabaseConnection cv = new DatabaseConnection();
-            cv.getConnection();
-            cv.ExcuteQueryDB(Sql);
-        } catch (Exception e) {
-        }
+
+    public void Delete(int maphongban) {
+
     }
-    
-  
+
 }
