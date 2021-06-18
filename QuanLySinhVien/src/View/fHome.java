@@ -49,6 +49,11 @@ public class fHome extends javax.swing.JFrame {
         menufunction.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
 
         jMenuItem1.setText("Quản lý phòng ban");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         menufunction.add(jMenuItem1);
 
         jMenuItem2.setText("Quản lý Khoa");
@@ -107,6 +112,11 @@ public class fHome extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        fPhongBan f = new  fPhongBan();
+        f.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
 
