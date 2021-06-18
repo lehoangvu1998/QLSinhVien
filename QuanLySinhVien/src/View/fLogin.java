@@ -3,6 +3,7 @@ package View;
 import NhanVien.BLL_NhanVien;
 import NhanVien.DAL_NhanVien;
 import NhanVien.DTO_NhanVien;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class fLogin extends javax.swing.JFrame {
@@ -44,6 +45,12 @@ public class fLogin extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel4.setText("Mật khẩu");
+
+        txtpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtpassKeyPressed(evt);
+            }
+        });
 
         btnlogin.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnlogin.setText("Đăng nhập");
@@ -177,6 +184,40 @@ public class fLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, " Hãy đăng nhập lại và tiếp tục hành trình trở thành vua hải tặc");
         }
     }//GEN-LAST:event_btnexitActionPerformed
+
+    private void txtpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpassKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            dto.setManhanvien(txbaccount.getText());
+            dto.setMatkhau(txtpass.getText());
+            if (dto.getManhanvien().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Tài khoản không được để trống");
+            } else if (dto.getMatkhau().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
+            } else {
+                if (bll.Login(dto)) {
+                    int role = dal.getRole(dto.getManhanvien());
+                    if (role == 0) {
+                        this.dispose();
+                        fHome.role = role;
+                        new fHome().setVisible(true);
+                    }
+                    if (role == 1) {
+                        this.dispose();
+                        fHome.role = role;
+                        new fHome().setVisible(true);
+                    }
+                    if (role == 2) {
+                        this.dispose();
+                        fHome.role = role;
+                        new fHome().setVisible(true);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "NOT OK");
+                }
+            }
+        }
+    }//GEN-LAST:event_txtpassKeyPressed
 
     public static void main(String args[]) {
 

@@ -11,6 +11,9 @@ public class fHome extends javax.swing.JFrame {
         }
         if (role == 1) {
             menuStudent.setVisible(false);
+            menuclasss.setVisible(false);
+            menumonhoc.setVisible(false);
+            menufunction.setVisible(false);
         }
         if (role == 2) {
             menuStudent.setVisible(false);
@@ -24,13 +27,13 @@ public class fHome extends javax.swing.JFrame {
 
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menufunction = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        menuclass = new javax.swing.JMenu();
+        menuclasss = new javax.swing.JMenuItem();
+        menumonhoc = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         menuStudent = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -41,35 +44,35 @@ public class fHome extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setForeground(new java.awt.Color(255, 51, 51));
-        jMenu1.setText("Chức năng");
-        jMenu1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        menufunction.setForeground(new java.awt.Color(255, 51, 51));
+        menufunction.setText("Chức năng");
+        menufunction.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
 
         jMenuItem1.setText("Quản lý phòng ban");
-        jMenu1.add(jMenuItem1);
+        menufunction.add(jMenuItem1);
 
         jMenuItem2.setText("Quản lý Khoa");
-        jMenu1.add(jMenuItem2);
+        menufunction.add(jMenuItem2);
 
         jMenuItem4.setText("Quản lý Giảng Viên");
-        jMenu1.add(jMenuItem4);
+        menufunction.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menufunction);
 
-        jMenu2.setForeground(new java.awt.Color(0, 102, 0));
-        jMenu2.setText("Đào tạo");
-        jMenu2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        menuclass.setForeground(new java.awt.Color(0, 102, 0));
+        menuclass.setText("Đào tạo");
+        menuclass.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
 
-        jMenuItem5.setText("Quản lý lớp");
-        jMenu2.add(jMenuItem5);
+        menuclasss.setText("Quản lý lớp");
+        menuclass.add(menuclasss);
 
-        jMenuItem6.setText("Quản lý môn học");
-        jMenu2.add(jMenuItem6);
+        menumonhoc.setText("Quản lý môn học");
+        menuclass.add(menumonhoc);
 
         jMenuItem7.setText("Quản lý điểm ");
-        jMenu2.add(jMenuItem7);
+        menuclass.add(jMenuItem7);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuclass);
 
         menuStudent.setForeground(new java.awt.Color(153, 102, 255));
         menuStudent.setText("Sinh viên");
@@ -113,19 +116,19 @@ public class fHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu menuContact;
     private javax.swing.JMenu menuStudent;
+    private javax.swing.JMenu menuclass;
+    private javax.swing.JMenuItem menuclasss;
+    private javax.swing.JMenu menufunction;
+    private javax.swing.JMenuItem menumonhoc;
     // End of variables declaration//GEN-END:variables
 }
