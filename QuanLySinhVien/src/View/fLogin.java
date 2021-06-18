@@ -1,13 +1,13 @@
 package View;
 
-import Login.BLL_Login;
-import Login.DTO_Login;
+import NhanVien.BLL_NhanVien;
+import NhanVien.DTO_NhanVien;
 import javax.swing.JOptionPane;
 
 public class fLogin extends javax.swing.JFrame {
 
-    DTO_Login dto = new DTO_Login();
-    BLL_Login bll = new BLL_Login();
+    DTO_NhanVien dto = new DTO_NhanVien();
+    BLL_NhanVien bll = new BLL_NhanVien();
 
     public fLogin() {
         initComponents();
@@ -126,6 +126,11 @@ public class fLogin extends javax.swing.JFrame {
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
         dto.setManhanvien(txbaccount.getText());
         dto.setMatkhau(txtpass.getText());
+        if (dto.getManhanvien().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tài khoản không được để trống");
+        } else if (dto.getMatkhau().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
+        }
         if (bll.Login(dto)) {
             JOptionPane.showMessageDialog(null, "OK");
         } else {
