@@ -5,34 +5,36 @@ import PhongBan.DTO_PhongBan;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class fPhongBan extends javax.swing.JFrame {
-    
+
     DTO_PhongBan dto = new DTO_PhongBan();
-    private  DAL_PhongBan dal;
-   private DefaultTableModel model;;
+    private DAL_PhongBan dal;
+    private DefaultTableModel model;
+
+    ;
     
     public fPhongBan() {
         initComponents();
         LoadPhongBan();
     }
-    
-    public void LoadPhongBan (){
-    
+
+    public void LoadPhongBan() {
+
         dal = new DAL_PhongBan();
-        ArrayList<PhongBan.DTO_PhongBan> list =  dal.GetPhongban();
-          model = (DefaultTableModel)tablephongban.getModel();
+        ArrayList<PhongBan.DTO_PhongBan> list = dal.GetPhongbanList();
+        model = (DefaultTableModel) tablephongban.getModel();
         // Xóa content
         model.setRowCount(0);
         Object[] row = new Object[2];
-        for(int i = 0; i < list.size(); i++)
-        {
+        for (int i = 0; i < list.size(); i++) {
             row[0] = list.get(i).getMaphongban();
             row[1] = list.get(i).getTenphongban();
             model.addRow(row);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -61,11 +63,18 @@ public class fPhongBan extends javax.swing.JFrame {
                 "Mã phòng ban", "Tên phòng ban"
             }
         ));
+        tablephongban.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablephongbanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablephongban);
 
         jLabel1.setText("Mã phòng ban");
 
         jLabel2.setText("Tên phòng ban");
+
+        txbmaphongban.setEditable(false);
 
         btnadd.setText("THÊM");
         btnadd.addActionListener(new java.awt.event.ActionListener() {
@@ -75,10 +84,25 @@ public class fPhongBan extends javax.swing.JFrame {
         });
 
         btndelete.setText("Xóa");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
 
-        btnedit.setText("SỬA");
+        btnedit.setText("CẬP NHẬT");
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
+            }
+        });
 
         btnreset.setText("LÀM LẠI");
+        btnreset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnresetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,19 +156,56 @@ public class fPhongBan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
-        dto.setMaphongban(txbmaphongban.getText());
         dto.setTenphongban(txbtenphongban.getText());
         if (dto.getTenphongban().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mã phòng ban không được trống");
-        } else if (dto.getTenphongban().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tên phòng ban không được trống");
         } else {
-
+            int dialogbutton = JOptionPane.YES_NO_OPTION;
+            int dialogrESULT = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới phòng ban này không ", "Thông báo", dialogbutton);
+            if (dialogrESULT == JOptionPane.YES_OPTION) {
+                dal.Insert(dto.getTenphongban());
+                JOptionPane.showMessageDialog(null, "Thêm phòng ban thành công");
+                LoadPhongBan();
+            }
         }
     }//GEN-LAST:event_btnaddActionPerformed
-    
+
+    private void tablephongbanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablephongbanMouseClicked
+        int i = tablephongban.getSelectedRow();
+        TableModel tb = tablephongban.getModel();
+        txbmaphongban.setText(tb.getValueAt(i, 0).toString());
+        txbtenphongban.setText(tb.getValueAt(i, 1).toString());
+    }//GEN-LAST:event_tablephongbanMouseClicked
+
+    private void btnresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresetActionPerformed
+        txbmaphongban.setText("");
+        txbtenphongban.setText("");
+        txbtenphongban.requestFocus();
+    }//GEN-LAST:event_btnresetActionPerformed
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        dto.setMaphongban(txbmaphongban.getText());
+        dto.setTenphongban(txbtenphongban.getText());
+        int dialogbutton = JOptionPane.YES_NO_OPTION;
+        int dialogrESULT = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thay đổi phòng ban này không ", "Thông báo", dialogbutton);
+        if (dialogrESULT == JOptionPane.YES_OPTION) {
+            dal.Update(dto.getMaphongban(), dto.getTenphongban());
+            LoadPhongBan();
+        }
+    }//GEN-LAST:event_btneditActionPerformed
+
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        dto.setMaphongban(txbmaphongban.getText());
+        int dialogbutton = JOptionPane.YES_NO_OPTION;
+        int dialogrESULT = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn sẽ xóa phòng ban này không ", "Thông báo", dialogbutton);
+        if (dialogrESULT == JOptionPane.YES_OPTION) {
+            dal.Delete(dto.getMaphongban());
+            LoadPhongBan();
+        }
+    }//GEN-LAST:event_btndeleteActionPerformed
+
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new fPhongBan().setVisible(true);

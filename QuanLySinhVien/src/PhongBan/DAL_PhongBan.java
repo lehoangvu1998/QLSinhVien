@@ -4,14 +4,14 @@ import clsdatabase.DatabaseConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 public class DAL_PhongBan {
 
     public static ResultSet rs = null;
-    public static DatabaseConnection db = new DatabaseConnection();
+    public static DatabaseConnection db = null;
 
-    public ArrayList<DTO_PhongBan> GetPhongban() {
+    public ArrayList<DTO_PhongBan> GetPhongbanList() {
         ArrayList<DTO_PhongBan> listphongban = new ArrayList<>();
         String sql = " select * from PHONGBAN";
         try {
@@ -29,24 +29,37 @@ public class DAL_PhongBan {
         return null;
     }
 
-    public DefaultTableModel getPhongban() {
-        DefaultTableModel df = new DefaultTableModel();
-        df.addColumn("MAPHONGBAN");
-        df.addColumn("TENPHONGBAN");
-        String sql = "select * from PHONGBAN";
+    public void Insert(String tenphongban) {
         try {
-            DatabaseConnection dc = new DatabaseConnection();
-            dc.getConnection();
-            rs = dc.ExcuteQueryGetTable(sql);
-            while (rs.next()) {
-                String maphongban = rs.getString(1);
-                String tenphongban = rs.getString(2);
-                df.addRow(new Object[]{maphongban, tenphongban});
-            }
-            return df;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            String sql = "insert into PHONGBAN values('" + tenphongban + "')";
+            DatabaseConnection cv = new DatabaseConnection();
+            cv.getConnection();
+            cv.ExcuteQueryDB(sql);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra ");
         }
-        return null;
     }
+
+    public void Update(String maphongban, String tenphongban) {
+        try {
+            String sql = "Update PHONGBAN set TENPHONGBAN=N'" + tenphongban + "' where MAPHONGBAN ='" + maphongban + "'";
+            DatabaseConnection cv = new DatabaseConnection();
+            cv.getConnection();
+            cv.ExcuteQueryDB(sql);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,  " Cập nhật không thành công ");
+        }
+    }
+    
+    public void Delete (String maphongban) {
+        try {
+            String Sql = "Delete from PHONGBAN where MAPHONGBAN='" + maphongban + "'";
+            DatabaseConnection cv = new DatabaseConnection();
+            cv.getConnection();
+            cv.ExcuteQueryDB(Sql);
+        } catch (Exception e) {
+        }
+    }
+    
+  
 }

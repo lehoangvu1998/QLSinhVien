@@ -130,3 +130,4 @@ GO
 
 select * from NHANVIEN
 
+select* from PHONGBAN

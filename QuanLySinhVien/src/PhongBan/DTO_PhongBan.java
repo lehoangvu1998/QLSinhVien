@@ -8,15 +8,16 @@ public class DTO_PhongBan {
         return maphongban;
     }
 
+    public void setMaphongban(String maphongban) {
+        this.maphongban = maphongban;
+    }
+
     public DTO_PhongBan(String maphongban, String tenphongban) {
         this.maphongban = maphongban;
         this.tenphongban = tenphongban;
     }
 
-    public void setMaphongban(String maphongban) {
-        this.maphongban = maphongban;
-    }
-
+ 
     public DTO_PhongBan() {
     }
 
