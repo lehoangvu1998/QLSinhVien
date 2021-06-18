@@ -1,22 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package NhanVien;
-
+package clsdatabase ;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
-/**
- *
- * @author Luxury
- */
 public class DatabaseConnection {
 
     private String dbs = null;
@@ -24,7 +16,8 @@ public class DatabaseConnection {
     private String usr = null;
     private String pwd = null;
 
-    private Connection con;
+    Connection con;
+    ResultSet rs = null;
 
     public Connection getConnection() {
         Properties pro = new Properties();
@@ -41,7 +34,7 @@ public class DatabaseConnection {
         } catch (IOException e) {
             System.err.println("Có lổi khi thao tác tệp tin " + e);
         } catch (ClassNotFoundException e) {
-           System.err.println("Không tìm thấy class " + e);
+            System.err.println("Không tìm thấy class " + e);
         } catch (SQLException e) {
             System.err.println("Lỗi kết nối cơ sở dữ liệu " + e);
         }
@@ -49,5 +42,25 @@ public class DatabaseConnection {
             throw new NullPointerException("Kết nối không thành công");
         }
         return con;
+    }
+
+    public void ExcuteQueryDB(String cauTruyVanSQL) {
+        try {
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(cauTruyVanSQL);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+
+    public ResultSet ExcuteQueryGetTable(String cauTruyVanSQL) {
+        try {
+            Statement stmt = con.createStatement();
+            rs = stmt.executeQuery(cauTruyVanSQL);
+            return rs;
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return null;
     }
 }

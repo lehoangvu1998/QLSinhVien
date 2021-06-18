@@ -129,3 +129,4 @@ CREATE TABLE DIEMTHI
 GO
 
 select * from NHANVIEN
+
