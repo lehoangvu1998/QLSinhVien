@@ -1,12 +1,14 @@
 package View;
 
 import NhanVien.BLL_NhanVien;
+import NhanVien.DAL_NhanVien;
 import NhanVien.DTO_NhanVien;
 import javax.swing.JOptionPane;
 
 public class fLogin extends javax.swing.JFrame {
 
     DTO_NhanVien dto = new DTO_NhanVien();
+    DAL_NhanVien dal = new DAL_NhanVien();
     BLL_NhanVien bll = new BLL_NhanVien();
 
     public fLogin() {
@@ -130,12 +132,31 @@ public class fLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Tài khoản không được để trống");
         } else if (dto.getMatkhau().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
-        }
-        if (bll.Login(dto)) {
-            JOptionPane.showMessageDialog(null, "OK");
         } else {
-            JOptionPane.showMessageDialog(null, "NOT OK");
+            if (bll.Login(dto)) {
+                int role = dal.getRole(dto.getManhanvien());// Cái này mới đúng nè role nó sẽ biết được manhanvien đó nằm ở role nào
+                //Nếu mà manhanvien là 1 thì role là 0
+                if (role == 0) {
+                    this.dispose();
+                    fHome.role = role;
+                    new fHome().setVisible(true);
+                }
+                if (role == 1) {
+                    this.dispose();
+                    fHome.role = role;
+                    new fHome().setVisible(true);
+                }
+                if (role == 2) {
+                    this.dispose();
+                    fHome.role = role;
+                    new fHome().setVisible(true);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "NOT OK");
+            }
         }
+
     }//GEN-LAST:event_btnloginActionPerformed
 
     private void cb_showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_showpassActionPerformed
