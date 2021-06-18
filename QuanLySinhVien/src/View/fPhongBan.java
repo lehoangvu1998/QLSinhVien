@@ -197,6 +197,8 @@ public final class fPhongBan extends javax.swing.JFrame {
         int dialogrESULT = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn sẽ xóa phòng ban này không ", "Thông báo", dialogbutton);
         if (dialogrESULT == JOptionPane.YES_OPTION) {
             dal.Delete(dto.getMaphongban());
+            txbmaphongban.setText("");
+            txbtenphongban.setText("");
             LoadPhongBan();
         }
     }//GEN-LAST:event_btndeleteActionPerformed
