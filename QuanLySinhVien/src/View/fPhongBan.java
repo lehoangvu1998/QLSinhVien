@@ -7,14 +7,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class fPhongBan extends javax.swing.JFrame {
+public final class fPhongBan extends javax.swing.JFrame {
 
     DTO_PhongBan dto = new DTO_PhongBan();
     private DAL_PhongBan dal;
     private DefaultTableModel model;
 
-    ;
-    
     public fPhongBan() {
         initComponents();
         LoadPhongBan();
@@ -25,7 +23,6 @@ public class fPhongBan extends javax.swing.JFrame {
         dal = new DAL_PhongBan();
         ArrayList<PhongBan.DTO_PhongBan> list = dal.GetPhongbanList();
         model = (DefaultTableModel) tablephongban.getModel();
-        // Xóa content
         model.setRowCount(0);
         Object[] row = new Object[2];
         for (int i = 0; i < list.size(); i++) {
