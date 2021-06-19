@@ -1,11 +1,13 @@
 package Khoa;
 
-import PhongBan.DTO_PhongBan;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BLL_Khoa {
 
     DALL_Khoa dal = new DALL_Khoa();
 
- 
+   public HashMap<String, Integer> Fillcombo() {
+        return dal.Fillcombo();
+    }
+
 }

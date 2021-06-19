@@ -7,47 +7,17 @@ package View;
 
 import Khoa.BLL_Khoa;
 import Khoa.DALL_Khoa;
-import PhongBan.DTO_PhongBan;
-import clsdatabase.DatabaseConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 public class fKhoa extends javax.swing.JFrame {
 
     BLL_Khoa bll = new BLL_Khoa();
     DALL_Khoa dal = new DALL_Khoa();
-
+    
     public fKhoa() {
         initComponents();
         Combo();
     }
-
-    PreparedStatement ps = null;
-    DatabaseConnection db = null;
-    ResultSet rs = null;
-    Connection con = null;
-
-    HashMap<String, Integer> Fillcombo() {
-        HashMap<String, Integer> map = new HashMap<>();
-        try {
-            String sql = "SELECT MAPHONGBAN, TENPHONGBAN FROM PHONGBAN";
-            db = new DatabaseConnection();
-            con = db.getConnection();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            DTO_PhongBan dto;
-            while (rs.next()) {
-                dto = new DTO_PhongBan(rs.getInt("MAPHONGBAN"), rs.getString("TENPHONGBAN"));
-                map.put(dto.getTenphongban(), dto.getMaphongban());
-            }
-        } catch (SQLException e) {
-        }
-        return map;
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -242,7 +212,7 @@ public class fKhoa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Combo() {
-        HashMap<String, Integer> map = Fillcombo();
+        HashMap<String, Integer> map = bll.Fillcombo();
         for (String str : map.keySet()) {
             cbbkhoa.addItem(str);
         }
@@ -258,9 +228,9 @@ public class fKhoa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void check(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_check
-        HashMap<String, Integer> map = Fillcombo();
+        HashMap<String, Integer> map = bll.Fillcombo();
 //         int maphongban= map....
-//        jTextField2.setText(map.get(cbbkhoa.getSelectedItem().toString()).toString());
+       jTextField2.setText(map.get(cbbkhoa.getSelectedItem().toString()).toString());
     }//GEN-LAST:event_check
 
     public static void main(String args[]) {
@@ -288,4 +258,5 @@ public class fKhoa extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
+
 }
