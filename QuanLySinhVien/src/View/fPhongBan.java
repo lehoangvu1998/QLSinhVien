@@ -70,7 +70,7 @@ public final class fPhongBan extends javax.swing.JFrame {
         btnedit = new javax.swing.JButton();
         btnreset = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         panelPhongBan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PHÒNG BAN", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 20), new java.awt.Color(0, 0, 153))); // NOI18N
 

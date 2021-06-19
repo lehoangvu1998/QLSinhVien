@@ -19,10 +19,10 @@ public class fSinhvien extends javax.swing.JFrame {
     }
 
     private void initalMSSV() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yy");
-        String mssv = dateFormat.format(Calendar.getInstance().getTime());
-        int random = rd.nextInt(100000) + 900000;
-        txtMssv.setText(mssv + random);
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yy");
+//        String mssv = dateFormat.format(Calendar.getInstance().getTime());
+//        int random = rd.nextInt(100000) + 900000;
+//        txtMssv.setText(mssv + random);
     }
 
     private void convertDateToPass() {
@@ -41,27 +41,17 @@ public class fSinhvien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtMssv = new javax.swing.JTextField();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        txtMssv.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtMssv, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 880, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtMssv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
+            .addGap(0, 546, Short.MAX_VALUE)
         );
 
         pack();
@@ -75,6 +65,5 @@ public class fSinhvien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField txtMssv;
     // End of variables declaration//GEN-END:variables
 }
