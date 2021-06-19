@@ -239,11 +239,10 @@ public final class fPhongBan extends javax.swing.JFrame {
     }//GEN-LAST:event_btneditActionPerformed
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
-        dto.setMaphongban(Integer.parseInt(txbtenphongban.getText()));
-        int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới phòng ban này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        dto.setMaphongban(Integer.parseInt(txbmaphongban.getText()));
+        int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn muốn xóa phòng ban này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
-
-            dal.Delete(dto.getMaphongban());
+            bll.Delete(dto.getMaphongban());
             txbmaphongban.setText("");
             txbtenphongban.setText("");
             LoadPhongBan();

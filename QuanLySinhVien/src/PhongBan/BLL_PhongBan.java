@@ -17,4 +17,8 @@ public class BLL_PhongBan {
   public int Update(String tenphongban, int maphongban) {
       return dal.Update(tenphongban, maphongban);
   }
+  
+     public int Delete(int maphongban)  {
+         return  dal.Delete(maphongban);
+     }
 }
