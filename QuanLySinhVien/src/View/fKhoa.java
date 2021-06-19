@@ -8,6 +8,11 @@ package View;
 import Khoa.BLL_Khoa;
 import Khoa.DALL_Khoa;
 import Khoa.DTO_Khoa;
+import clsdatabase.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -20,15 +25,40 @@ public final class fKhoa extends javax.swing.JFrame {
     DALL_Khoa dal = new DALL_Khoa();
     ArrayList<DTO_Khoa> arr = new ArrayList<>();
 
+    PreparedStatement ps = null;
+    DatabaseConnection db = null;
+    ResultSet rs = null;
+    Connection con = null;
+
     public fKhoa() {
         initComponents();
-        Combo();
+        // Combo();
         LoadKhoa();
+        GetMaPhongBan();
+    }
+
+    public void GetMaPhongBan() {
+        cbbkhoa.removeAllItems();
+        try {
+            String sql = "select * from PHONGBAN";
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String maloai = rs.getString("MAPHONGBAN");
+                String tenphong = rs.getString("TENPHONGBAN");
+                String c = maloai + " | "+ tenphong ;
+                cbbkhoa.addItem(c);
+            }
+        } catch (SQLException e) {
+
+        }
     }
 
     public void LoadKhoa() {
-        String Header[] = {"Mã Phòng Ban", "Mã Khoa", "Tên Khoa", "Số Điện Thoại"};
-        DefaultTableModel model = new DefaultTableModel(Header, 0);
+        String header[] = {"Mã Phòng Ban", "Mã Khoa", "Tên Khoa", "Số Điện Thoại"};
+         DefaultTableModel model = new DefaultTableModel(header, 0);
         arr = bll.GetListKhoa();
         for (int i = 0; i < arr.size(); i++) {
             dto = arr.get(i);
@@ -117,6 +147,7 @@ public final class fKhoa extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(102, 102, 0));
         jLabel4.setText("Mã khoa");
 
+        cbbkhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0" }));
         cbbkhoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbkhoaActionPerformed(evt);
@@ -238,16 +269,15 @@ public final class fKhoa extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Combo() {
-        HashMap<String, Integer> map = bll.Fillcombo();
-        for (String str : map.keySet()) {
-            cbbkhoa.addItem(str);
-            //        HashMap<String, Integer> map = bll.Fillcombo();
-//         int maphongban= map....
-            //       jTextField2.setText(map.get(cbbkhoa.getSelectedItem().toString()).toString());
-        }
-    }
-
+//    private void Combo() {
+//        HashMap<String, Integer> map = bll.Fillcombo();
+//        for (String str : map.keySet()) {
+//            cbbkhoa.addItem(str);
+//            //        HashMap<String, Integer> map = bll.Fillcombo();
+////         int maphongban= map....
+//            //       jTextField2.setText(map.get(cbbkhoa.getSelectedItem().toString()).toString());
+//        }
+//    }
 
     private void cbbkhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbkhoaActionPerformed
 
@@ -258,7 +288,7 @@ public final class fKhoa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void check(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_check
-
+       
         dto.setMakhoa(Integer.parseInt(txbmakhoa.getText()));
         dto.setTenkhoa(txbtenkhoa.getText());
         dto.setSDT(Integer.parseInt(txbsdt.getText()));

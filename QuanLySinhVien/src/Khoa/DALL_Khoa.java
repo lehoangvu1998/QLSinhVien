@@ -16,27 +16,28 @@ public class DALL_Khoa {
     ResultSet rs = null;
     Connection con = null;
 
-    public HashMap<String, Integer> Fillcombo() {
-        HashMap<String, Integer> map = new HashMap<>();
-        try {
-            String sql = "SELECT MAPHONGBAN, TENPHONGBAN FROM PHONGBAN";
-            db = new DatabaseConnection();
-            con = db.getConnection();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            DTO_PhongBan dto;
-            while (rs.next()) {
-                dto = new DTO_PhongBan(rs.getInt("MAPHONGBAN"), rs.getString("TENPHONGBAN"));
-                map.put(dto.getTenphongban(), dto.getMaphongban());
-            }
-        } catch (SQLException e) {
-        }
-        return map;
-    }
+//    public HashMap<String, Integer> Fillcombo() {
+//        HashMap<String, Integer> map = new HashMap<>();
+//        try {
+//            String sql = "SELECT MAPHONGBAN, TENPHONGBAN FROM PHONGBAN";
+//            db = new DatabaseConnection();
+//            con = db.getConnection();
+//            ps = con.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//            DTO_PhongBan dto;
+//            while (rs.next()) {
+//                dto = new DTO_PhongBan(rs.getInt("MAPHONGBAN"), rs.getString("TENPHONGBAN"));
+//                map.put(dto.getTenphongban(), dto.getMaphongban());
+//            }
+//        } catch (SQLException e) {
+//        }
+//        return map;
+//    }
 
+    
     public ArrayList<DTO_Khoa> GetListKhoa() {
         ArrayList<DTO_Khoa> listkhoa = new ArrayList<>();
-        String sql = " SELECT * FROM KHOA";
+        String sql = " SELECT MAPHONGBAN, MAKHOA, TENKHOA, SDT FROM KHOA";
         try {
             db = new DatabaseConnection();
             con = db.getConnection();

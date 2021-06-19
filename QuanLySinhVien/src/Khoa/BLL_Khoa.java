@@ -7,9 +7,9 @@ public class BLL_Khoa {
 
     DALL_Khoa dal = new DALL_Khoa();
 
-    public HashMap<String, Integer> Fillcombo() {
-        return dal.Fillcombo();
-    }
+//    public HashMap<String, Integer> Fillcombo() {
+//        return dal.Fillcombo();
+//    }
 
     public ArrayList<DTO_Khoa> GetListKhoa() {
         return dal.GetListKhoa();
