@@ -14,7 +14,7 @@ public class BLL_PhongBan {
         return dal.insertPhongban(maphongban, tenphongban);
     }
 
-     public int Update(int maphongban, String tenphongban){
-         return dal.Update(maphongban, tenphongban);
-     }
+  public int Update(String tenphongban, int maphongban) {
+      return dal.Update(tenphongban, maphongban);
+  }
 }

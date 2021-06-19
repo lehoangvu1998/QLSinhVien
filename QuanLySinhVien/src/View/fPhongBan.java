@@ -230,7 +230,7 @@ public final class fPhongBan extends javax.swing.JFrame {
         } else {
             int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn sửa đổi phòng ban này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
-                bll.Update(dto.getMaphongban(), dto.getTenphongban());
+                bll.Update(dto.getTenphongban(), dto.getMaphongban());
                 JOptionPane.showMessageDialog(null, "Cập nhật phòng ban thành công");
                 LoadPhongBan();
             }
