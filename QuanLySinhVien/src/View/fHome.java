@@ -40,7 +40,7 @@ public final class fHome extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menufunction = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menukhoa = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         mnsinhven = new javax.swing.JMenuItem();
         menuclass = new javax.swing.JMenu();
@@ -73,8 +73,13 @@ public final class fHome extends javax.swing.JFrame {
         });
         menufunction.add(jMenuItem1);
 
-        jMenuItem2.setText("Quản lý Khoa");
-        menufunction.add(jMenuItem2);
+        menukhoa.setText("Quản lý Khoa");
+        menukhoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menukhoaActionPerformed(evt);
+            }
+        });
+        menufunction.add(menukhoa);
 
         jMenuItem4.setText("Quản lý Giảng Viên");
         menufunction.add(jMenuItem4);
@@ -161,6 +166,11 @@ public final class fHome extends javax.swing.JFrame {
         f.show();
     }//GEN-LAST:event_mnsinhvenActionPerformed
 
+    private void menukhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menukhoaActionPerformed
+        fKhoa f = new  fKhoa();
+        f.show();
+    }//GEN-LAST:event_menukhoaActionPerformed
+
     private void Datehouse() {
 //        DateFormat df = new SimpleDateFormat("dd-M-yyyy hh:mm");
 //        Date date = java.util.Calendar.getInstance().getTime();
@@ -212,7 +222,6 @@ public final class fHome extends javax.swing.JFrame {
     private javax.swing.JLabel datetime;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -223,6 +232,7 @@ public final class fHome extends javax.swing.JFrame {
     private javax.swing.JMenu menuclass;
     private javax.swing.JMenuItem menuclasss;
     private javax.swing.JMenu menufunction;
+    private javax.swing.JMenuItem menukhoa;
     private javax.swing.JMenuItem menumonhoc;
     private javax.swing.JMenuItem mnsinhven;
     private javax.swing.JLabel so3;
