@@ -1,10 +1,9 @@
 package View;
 
 import static java.lang.Thread.sleep;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
-import java.util.Date;
+
 import java.util.GregorianCalendar;
 
 public final class fHome extends javax.swing.JFrame {
@@ -43,7 +42,7 @@ public final class fHome extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        mnsinhven = new javax.swing.JMenuItem();
         menuclass = new javax.swing.JMenu();
         menuclasss = new javax.swing.JMenuItem();
         menumonhoc = new javax.swing.JMenuItem();
@@ -80,8 +79,13 @@ public final class fHome extends javax.swing.JFrame {
         jMenuItem4.setText("Quản lý Giảng Viên");
         menufunction.add(jMenuItem4);
 
-        jMenuItem10.setText("Quản lý Sinh viên");
-        menufunction.add(jMenuItem10);
+        mnsinhven.setText("Quản lý Sinh viên");
+        mnsinhven.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnsinhvenActionPerformed(evt);
+            }
+        });
+        menufunction.add(mnsinhven);
 
         jMenuBar1.add(menufunction);
 
@@ -152,6 +156,11 @@ public final class fHome extends javax.swing.JFrame {
         f.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void mnsinhvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnsinhvenActionPerformed
+        fSinhvien f = new fSinhvien();
+        f.show();
+    }//GEN-LAST:event_mnsinhvenActionPerformed
+
     private void Datehouse() {
 //        DateFormat df = new SimpleDateFormat("dd-M-yyyy hh:mm");
 //        Date date = java.util.Calendar.getInstance().getTime();
@@ -203,7 +212,6 @@ public final class fHome extends javax.swing.JFrame {
     private javax.swing.JLabel datetime;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -216,6 +224,7 @@ public final class fHome extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuclasss;
     private javax.swing.JMenu menufunction;
     private javax.swing.JMenuItem menumonhoc;
+    private javax.swing.JMenuItem mnsinhven;
     private javax.swing.JLabel so3;
     // End of variables declaration//GEN-END:variables
 }

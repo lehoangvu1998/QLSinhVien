@@ -48,6 +48,7 @@ CREATE TABLE USERS
 	MALOP INT,
 	MAPHONGBAN INT,
 	ROLE INT ,
+	NGAYVAOTRUONG DATE,
 	FOREIGN KEY (MAPHONGBAN) REFERENCES PHONGBAN (MAPHONGBAN),
 	FOREIGN KEY (MAKHOA) REFERENCES KHOA (MAKHOA),
 	FOREIGN KEY (MALOP) REFERENCES LOP (MALOP)
@@ -56,11 +57,10 @@ GO
 
 CREATE TABLE THANNHAN 
 (
-	MATHANNHAN INT  PRIMARY KEY,
 	TENTHANNHAN NVARCHAR (50),
 	SDT CHAR (12) NOT NULL,
 	QUANHE NVARCHAR (15),
-	MAUSERS INT,
+	MAUSERS INT PRIMARY KEY,
 	FOREIGN KEY (MAUSERS) REFERENCES  USERS (MAUSERS)
 )
 GO
@@ -116,9 +116,9 @@ GO
 --	MAPHONGBAN INT,
 set dateformat dmy
 
-INSERT INTO USERS VALUES (123, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 0)
-INSERT INTO USERS VALUES (234, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 1)
-INSERT INTO USERS VALUES (345, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 2)
+INSERT INTO USERS VALUES (123, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 0, null)
+INSERT INTO USERS VALUES (234, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 1, null)
+INSERT INTO USERS VALUES (345, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 2, null)
 
 select * from USERS
 
@@ -129,4 +129,4 @@ values (123, N'ABC')
 insert PHONGBAN 
 values (234, N'BCD')
 
-delete PHONGBAN
+delete PHONGBAN where MAPHONGBAN = '789'

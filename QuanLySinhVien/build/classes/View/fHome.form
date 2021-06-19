@@ -38,10 +38,13 @@
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; Gi&#x1ea3;ng Vi&#xea;n"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
+            <MenuItem class="javax.swing.JMenuItem" name="mnsinhven">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; Sinh vi&#xea;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnsinhvenActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
