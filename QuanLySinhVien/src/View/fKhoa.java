@@ -7,32 +7,59 @@ package View;
 
 import Khoa.BLL_Khoa;
 import Khoa.DALL_Khoa;
+import Khoa.DTO_Khoa;
+import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-public class fKhoa extends javax.swing.JFrame {
+public final class fKhoa extends javax.swing.JFrame {
 
     BLL_Khoa bll = new BLL_Khoa();
+    DTO_Khoa dto = new DTO_Khoa();
     DALL_Khoa dal = new DALL_Khoa();
-    
+    ArrayList<DTO_Khoa> arr = new ArrayList<>();
+
     public fKhoa() {
         initComponents();
         Combo();
+        LoadKhoa();
     }
+
+    public void LoadKhoa() {
+        String Header[] = {"Mã Phòng Ban", "Mã Khoa", "Tên Khoa", "Số Điện Thoại"};
+        DefaultTableModel model = new DefaultTableModel(Header, 0);
+        arr = bll.GetListKhoa();
+        for (int i = 0; i < arr.size(); i++) {
+            dto = arr.get(i);
+            int a = dto.getMaphongban();
+            int b = dto.getMakhoa();
+            String c = dto.getTenkhoa();
+            int d = dto.getSDT();
+            Object[] row = {a, b, c, d};
+            model.addRow(row);
+        }
+        tablekhoa.setModel(model);
+        tablekhoa.setDefaultEditor(Object.class, null);
+        tablekhoa.getTableHeader().setResizingAllowed(false);
+        tablekhoa.getTableHeader().setReorderingAllowed(false);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablekhoa = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txbmakhoa = new javax.swing.JTextField();
+        txbtenkhoa = new javax.swing.JTextField();
+        txbsdt = new javax.swing.JTextField();
         cbbkhoa = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -44,7 +71,7 @@ public class fKhoa extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách khoa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 24), new java.awt.Color(153, 102, 255))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablekhoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -52,7 +79,7 @@ public class fKhoa extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablekhoa);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,7 +134,7 @@ public class fKhoa extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
+                    .addComponent(txbmakhoa)
                     .addComponent(cbbkhoa, 0, 162, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,8 +142,8 @@ public class fKhoa extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
+                    .addComponent(txbtenkhoa)
+                    .addComponent(txbsdt, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
                 .addGap(54, 54, 54))
         );
         jPanel2Layout.setVerticalGroup(
@@ -126,14 +153,14 @@ public class fKhoa extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txbtenkhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbkhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txbmakhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txbsdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -215,6 +242,9 @@ public class fKhoa extends javax.swing.JFrame {
         HashMap<String, Integer> map = bll.Fillcombo();
         for (String str : map.keySet()) {
             cbbkhoa.addItem(str);
+            //        HashMap<String, Integer> map = bll.Fillcombo();
+//         int maphongban= map....
+            //       jTextField2.setText(map.get(cbbkhoa.getSelectedItem().toString()).toString());
         }
     }
 
@@ -228,9 +258,20 @@ public class fKhoa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void check(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_check
-        HashMap<String, Integer> map = bll.Fillcombo();
-//         int maphongban= map....
-       jTextField2.setText(map.get(cbbkhoa.getSelectedItem().toString()).toString());
+
+        dto.setMakhoa(Integer.parseInt(txbmakhoa.getText()));
+        dto.setTenkhoa(txbtenkhoa.getText());
+        dto.setSDT(Integer.parseInt(txbsdt.getText()));
+        if (dto.getTenkhoa().isEmpty()) {
+            JOptionPane.showMessageDialog(this, " Tên khoa không được bỏ trống");
+        } else {
+            int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới Khoa này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                bll.InsertKhoa(dto.getMaphongban(), dto.getMakhoa(), dto.getTenkhoa(), dto.getSDT());
+                JOptionPane.showMessageDialog(null, "Thêm khoathành công");
+                LoadKhoa();
+            }
+        }
     }//GEN-LAST:event_check
 
     public static void main(String args[]) {
@@ -253,10 +294,10 @@ public class fKhoa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTable tablekhoa;
+    private javax.swing.JTextField txbmakhoa;
+    private javax.swing.JTextField txbsdt;
+    private javax.swing.JTextField txbtenkhoa;
     // End of variables declaration//GEN-END:variables
 
 }
