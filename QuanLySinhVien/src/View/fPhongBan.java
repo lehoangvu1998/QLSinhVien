@@ -3,7 +3,10 @@ package View;
 import PhongBan.BLL_PhongBan;
 import PhongBan.DAL_PhongBan;
 import PhongBan.DTO_PhongBan;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -14,10 +17,23 @@ public final class fPhongBan extends javax.swing.JFrame {
     DAL_PhongBan dal = new DAL_PhongBan();
     DTO_PhongBan dto = new DTO_PhongBan();
     ArrayList<DTO_PhongBan> arr = new ArrayList<>();
+    Random rd = new Random();
 
     public fPhongBan() {
         initComponents();
         LoadPhongBan();
+        initalRoom();
+        txbtenphongban.requestFocus();
+    }
+
+    private void initalRoom() {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yy");
+//        String maroom = dateFormat.format(Calendar.getInstance().getTime());
+//        int random = rd.nextInt(100) + 900;
+//        txbmaphongban.setText(maroom + random);
+        int code = (int) Math.floor(((Math.random() * 899999) + 100000));
+        String a = Integer.toString(code);
+        txbmaphongban.setText(a);
     }
 
     public void LoadPhongBan() {
@@ -35,7 +51,7 @@ public final class fPhongBan extends javax.swing.JFrame {
         tablephongban.setDefaultEditor(Object.class, null); //Không cho nhập
         tablephongban.getTableHeader().setResizingAllowed(false);
         tablephongban.getTableHeader().setReorderingAllowed(false);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -176,17 +192,22 @@ public final class fPhongBan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
-        dto.setMaphongban(Integer.parseInt(txbtenphongban.getText()));
-        if (dto.getTenphongban().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tên phòng ban không được trống");
-        } else {
-            int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới phòng ban này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (result == JOptionPane.YES_OPTION) {
-                bll.insertPhongban(dto.getMaphongban(), dto.getTenphongban());
-                JOptionPane.showMessageDialog(null, "Thêm phòng ban thành công");
-                LoadPhongBan();
+        try {
+            dto.setMaphongban(Integer.parseInt(txbmaphongban.getText()));
+            dto.setTenphongban(txbtenphongban.getText());
+            if (dto.getTenphongban().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Tên phòng ban không được trống");
+            } else {
+                int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới phòng ban này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    bll.insertPhongban(dto.getMaphongban(), dto.getTenphongban());
+                    JOptionPane.showMessageDialog(null, "Thêm phòng ban thành công");
+                    LoadPhongBan();
+                }
             }
+        } catch (NumberFormatException exception) {
         }
+
     }//GEN-LAST:event_btnaddActionPerformed
 
     private void tablephongbanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablephongbanMouseClicked
@@ -203,13 +224,18 @@ public final class fPhongBan extends javax.swing.JFrame {
     }//GEN-LAST:event_btnresetActionPerformed
 
     private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
-        dto.setMaphongban(Integer.parseInt(txbtenphongban.getText()));
         dto.setTenphongban(txbtenphongban.getText());
-        int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới phòng ban này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
-            dal.Update(dto.getMaphongban(), dto.getTenphongban());
-            LoadPhongBan();
+        if (dto.getTenphongban().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên phòng ban không được trống");
+        } else {
+            int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn sửa đổi phòng ban này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                bll.Update(dto.getMaphongban(), dto.getTenphongban());
+                JOptionPane.showMessageDialog(null, "Cập nhật phòng ban thành công");
+                LoadPhongBan();
+            }
         }
+
     }//GEN-LAST:event_btneditActionPerformed
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed

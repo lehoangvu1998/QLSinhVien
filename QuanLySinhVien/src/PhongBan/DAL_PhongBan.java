@@ -50,8 +50,20 @@ public class DAL_PhongBan {
         return result;
     }
 
-    public void Update(int maphongban, String tenphongban) {
+    public int Update(int maphongban, String tenphongban) {
+        int result = 0;
+        String sql = " Update PHONGBAN set TENPHONGBAN= ? WHERE MAPHONGBAN = ? ";
+        try {
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, maphongban);
+            ps.setString(2, tenphongban);
+            result = ps.executeUpdate();
+        } catch (SQLException ex) {
 
+        }
+        return result;
     }
 
     public void Delete(int maphongban) {
