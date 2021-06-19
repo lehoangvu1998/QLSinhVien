@@ -10,7 +10,6 @@ CREATE TABLE PHONGBAN
 )
 GO
 
-SELECT* FROM PHONGBAN
 
 CREATE TABLE KHOA 
 (
@@ -114,17 +113,21 @@ GO
 --	MAKHOA INT,
 --	MALOP INT,
 --	MAPHONGBAN INT,
+--NGAYVAOTRUONG DATE,
 set dateformat dmy
+
+INSERT INTO KHOA VALUES (?,?,?,?)
 
 INSERT INTO USERS VALUES (123, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 0, null)
 INSERT INTO USERS VALUES (234, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 1, null)
 INSERT INTO USERS VALUES (345, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 2, null)
 
-select * from USERS
+select * from PHONGBAN
 
-select* from PHONGBAN
+select TENPHONGBAN from PHONGBAN
 
-insert PHONGBAN 
+
+insert INTO PHONGBAN 
 values (123, N'ABC')
 insert PHONGBAN 
 values (234, N'BCD')

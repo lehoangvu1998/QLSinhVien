@@ -3,9 +3,7 @@ package View;
 import PhongBan.BLL_PhongBan;
 import PhongBan.DAL_PhongBan;
 import PhongBan.DTO_PhongBan;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -224,6 +222,7 @@ public final class fPhongBan extends javax.swing.JFrame {
     }//GEN-LAST:event_btnresetActionPerformed
 
     private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        dto.setMaphongban(Integer.parseInt(txbmaphongban.getText()));
         dto.setTenphongban(txbtenphongban.getText());
         if (dto.getTenphongban().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tên phòng ban không được trống");

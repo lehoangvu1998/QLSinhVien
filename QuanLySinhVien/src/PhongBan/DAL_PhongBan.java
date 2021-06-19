@@ -57,7 +57,7 @@ public class DAL_PhongBan {
             db = new DatabaseConnection();
             con = db.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, tenphongban );
+            ps.setString(1, tenphongban);
             ps.setInt(2, maphongban);
             result = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -66,7 +66,7 @@ public class DAL_PhongBan {
     }
 
     public int Delete(int maphongban) {
-        int result = 0; 
+        int result = 0;
         String sql = " DELETE PHONGBAN WHERE  MAPHONGBAN=  ?";
         try {
             db = new DatabaseConnection();

@@ -7,11 +7,13 @@ package View;
 
 import Khoa.BLL_Khoa;
 import Khoa.DALL_Khoa;
+import PhongBan.DTO_PhongBan;
 import clsdatabase.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class fKhoa extends javax.swing.JFrame {
 
@@ -20,7 +22,7 @@ public class fKhoa extends javax.swing.JFrame {
 
     public fKhoa() {
         initComponents();
-        Fillcombo();
+        Combo();
     }
 
     PreparedStatement ps = null;
@@ -28,19 +30,22 @@ public class fKhoa extends javax.swing.JFrame {
     ResultSet rs = null;
     Connection con = null;
 
-    private void Fillcombo() {
+    HashMap<String, Integer> Fillcombo() {
+        HashMap<String, Integer> map = new HashMap<>();
         try {
-            String sql = "SELECT TENPHONGBAN FROM PHONGBAN";
+            String sql = "SELECT MAPHONGBAN, TENPHONGBAN FROM PHONGBAN";
             db = new DatabaseConnection();
             con = db.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
+            DTO_PhongBan dto;
             while (rs.next()) {
-                String name = rs.getString("TENPHONGBAN");
-                cbbkhoa.addItem(name);
+                dto = new DTO_PhongBan(rs.getInt("MAPHONGBAN"), rs.getString("TENPHONGBAN"));
+                map.put(dto.getTenphongban(), dto.getMaphongban());
             }
         } catch (SQLException e) {
         }
+        return map;
     }
 
     @SuppressWarnings("unchecked")
@@ -165,6 +170,11 @@ public class fKhoa extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14), new java.awt.Color(255, 0, 51))); // NOI18N
 
         jButton1.setText("Thêm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                check(evt);
+            }
+        });
 
         jButton2.setText("Xóa");
 
@@ -231,6 +241,14 @@ public class fKhoa extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Combo() {
+        HashMap<String, Integer> map = Fillcombo();
+        for (String str : map.keySet()) {
+            cbbkhoa.addItem(str);
+        }
+    }
+
+
     private void cbbkhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbkhoaActionPerformed
 
     }//GEN-LAST:event_cbbkhoaActionPerformed
@@ -239,11 +257,15 @@ public class fKhoa extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void check(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_check
+        HashMap<String, Integer> map = Fillcombo();
+//         int maphongban= map....
+//        jTextField2.setText(map.get(cbbkhoa.getSelectedItem().toString()).toString());
+    }//GEN-LAST:event_check
+
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new fKhoa().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new fKhoa().setVisible(true);
         });
     }
 
