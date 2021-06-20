@@ -83,9 +83,9 @@ public final class fKhoa extends javax.swing.JFrame {
         cbbkhoa = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btndelete = new javax.swing.JButton();
+        btnupdate = new javax.swing.JButton();
+        BtbReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -204,14 +204,24 @@ public final class fKhoa extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Xóa");
-
-        jButton3.setText("Sửa");
-
-        jButton4.setText("Làm lại");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btndelete.setText("Xóa");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btndeleteActionPerformed(evt);
+            }
+        });
+
+        btnupdate.setText("Cập nhật");
+        btnupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnupdateActionPerformed(evt);
+            }
+        });
+
+        BtbReset.setText("Làm lại");
+        BtbReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtbResetActionPerformed(evt);
             }
         });
 
@@ -223,11 +233,11 @@ public final class fKhoa extends javax.swing.JFrame {
                 .addGap(121, 121, 121)
                 .addComponent(jButton1)
                 .addGap(117, 117, 117)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(103, 103, 103)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
+                .addComponent(btnupdate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtbReset)
                 .addGap(82, 82, 82))
         );
         jPanel3Layout.setVerticalGroup(
@@ -235,9 +245,9 @@ public final class fKhoa extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btndelete)
+                    .addComponent(btnupdate)
+                    .addComponent(BtbReset))
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
@@ -281,9 +291,12 @@ public final class fKhoa extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cbbkhoaActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void BtbResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtbResetActionPerformed
+        RandomKhoa();
+        txbtenkhoa.setText("");
+        txbsdt.setText("");
+        txbtenkhoa.requestFocus();
+    }//GEN-LAST:event_BtbResetActionPerformed
 
     private void check(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_check
         try {
@@ -311,10 +324,42 @@ public final class fKhoa extends javax.swing.JFrame {
     private void tablekhoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablekhoaMouseClicked
         int i = tablekhoa.getSelectedRow();
         TableModel tb = tablekhoa.getModel();
-         txbmakhoa.setText(tb.getValueAt(i, 0).toString());
-         txbtenkhoa.setText(tb.getValueAt(i, 1).toString());
-         txbsdt.setText(tb.getValueAt(i, 2).toString());
+        txbmakhoa.setText(tb.getValueAt(i, 0).toString());
+        txbtenkhoa.setText(tb.getValueAt(i, 1).toString());
+        txbsdt.setText(tb.getValueAt(i, 3).toString());
     }//GEN-LAST:event_tablekhoaMouseClicked
+
+    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+        try {
+            dto.setTenkhoa(txbtenkhoa.getText());
+            dto.setSodienthoai(txbsdt.getText());
+            if (dto.getTenkhoa().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên Khoa không được bỏ trống ");
+                txbtenkhoa.requestFocus();
+            } else if (dto.getSodienthoai().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Số điện thoại không được bỏ trống ");
+                txbsdt.requestFocus();
+            } else {
+                bll.Updatekhoa(dto.getTenkhoa(), dto.getSodienthoai(), dto.getMaphongban(), dto.getMakhoa());
+                JOptionPane.showMessageDialog(this, " Cập nhật thành công ");
+                LoadKhoa();
+            }
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, " Lỗi ");
+        }
+    }//GEN-LAST:event_btnupdateActionPerformed
+
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        dto.setMakhoa(Integer.parseInt(txbmakhoa.getText()));
+        int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn muốn xóa phòng ban này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            bll.Delete(dto.getMakhoa());
+            txbmakhoa.setText("");
+            txbtenkhoa.setText("");
+            txbsdt.setText("");
+            LoadKhoa();
+        }
+    }//GEN-LAST:event_btndeleteActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
@@ -323,11 +368,11 @@ public final class fKhoa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtbReset;
+    private javax.swing.JButton btndelete;
+    private javax.swing.JButton btnupdate;
     private javax.swing.JComboBox<String> cbbkhoa;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

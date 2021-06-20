@@ -36,23 +36,22 @@ public class DALL_Khoa {
 
     public ArrayList<DTO_Khoa> GetListKhoa() {
         ArrayList<DTO_Khoa> listkhoa = new ArrayList<>();
-        String sql = " SELECT MAKHOA, TENKHOA, MAPHONGBAN, SDT FROM KHOA"; // phai theo tu tu ben sql ha
-        //Muốn để sao cũng đc á tại theo cho dễ hình  dung cho dễ làm // t biet sao nó méo lên r
+        String sql = " SELECT MAKHOA, TENKHOA, MAPHONGBAN, SDT FROM KHOA";
         try {
             db = new DatabaseConnection();
             con = db.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                DTO_Khoa dto = new DTO_Khoa();            
+                DTO_Khoa dto = new DTO_Khoa();
                 dto.setMakhoa(rs.getInt("MAKHOA"));
-                dto.setTenkhoa(rs.getString("TENKHOA")); // copy xong
+                dto.setTenkhoa(rs.getString("TENKHOA"));
                 dto.setMaphongban(rs.getInt("MAPHONGBAN"));
                 dto.setSodienthoai(rs.getString("SDT"));
                 listkhoa.add(dto);
             }
         } catch (SQLException e) {
-            
+
         } finally {
             try {
                 con.close();
@@ -80,9 +79,36 @@ public class DALL_Khoa {
         }
         return result;
     }
-}
 
-//Sửa lại mấy int -> string nha sđt thôi ok 
-//để int nó sẽ mất sô 0 ok cau insert đúng k
-//Về lý thuyết là đúng nhưng có thể khi insert vào thằng mã phòng ban sẽ xảy ra 2 TH 1 là null 2 là lỗi khi insert
-// thí dụ là h cái combocx nó 
+    public int Updatekhoa(String tenkhoa, String sdt, int maphongban, int makhoa) {
+        int result = 0;
+        String sql = " UPDATE KHOA SET TENKHOA = ? , SDT = ?, MAPHONGBAN = ? WHERE MAKHOA = ?";
+        try {
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, tenkhoa);
+            ps.setString(2, sdt);
+            ps.setInt(3, maphongban);
+            ps.setInt(4, makhoa);
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+        return result;
+    }
+
+    public int Delete(int makhoa) {
+        int result = 0;
+        String sql = " DELETE KHOA WHERE MAKHOA = ?";
+        try {
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, makhoa);
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+
+        }
+        return result;
+    }
+}

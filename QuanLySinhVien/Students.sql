@@ -126,7 +126,7 @@ select * from PHONGBAN
 
 select TENPHONGBAN from PHONGBAN
 
-insert into KHOA values (98, N'CNTT', 123, '098765432')
+insert into KHOA values (958, N'CNTT', null, '098765432')
 select * from KHOA
 insert INTO PHONGBAN 
 values (123, N'ABC')
@@ -135,4 +135,5 @@ values (234, N'BCD')
 
 SELECT MAPHONGBAN, MAKHOA, TENKHOA, SDT FROM KHOA
 
+select * from KHOA
 delete PHONGBAN where MAPHONGBAN = '789'
