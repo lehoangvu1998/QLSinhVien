@@ -216,7 +216,7 @@ public final class fPhongBan extends javax.swing.JFrame {
     }//GEN-LAST:event_tablephongbanMouseClicked
 
     private void btnresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresetActionPerformed
-        txbmaphongban.setText("");
+        initalRoom();
         txbtenphongban.setText("");
         txbtenphongban.requestFocus();
     }//GEN-LAST:event_btnresetActionPerformed

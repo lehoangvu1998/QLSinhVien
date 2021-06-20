@@ -3,10 +3,20 @@ public class DTO_Khoa {
     private int makhoa;
     private int maphongban;
     private String tenkhoa;
-    private int SDT;
+    private String sodienthoai;
 
     public int getMakhoa() {
         return makhoa;
+    }
+
+    public DTO_Khoa() {
+    }
+
+    public DTO_Khoa(int makhoa, int maphongban, String tenkhoa, String sodienthoai) {
+        this.makhoa = makhoa;
+        this.maphongban = maphongban;
+        this.tenkhoa = tenkhoa;
+        this.sodienthoai = sodienthoai;
     }
 
     public void setMakhoa(int makhoa) {
@@ -29,11 +39,15 @@ public class DTO_Khoa {
         this.tenkhoa = tenkhoa;
     }
 
-    public int getSDT() {
-        return SDT;
+    public String getSodienthoai() {
+        return sodienthoai;
     }
 
-    public void setSDT(int SDT) {
-        this.SDT = SDT;
+    public void setSodienthoai(String sodienthoai) {
+        this.sodienthoai = sodienthoai;
     }
+
+
+
+
 }

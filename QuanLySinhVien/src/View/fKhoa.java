@@ -9,21 +9,24 @@ import Khoa.BLL_Khoa;
 import Khoa.DALL_Khoa;
 import Khoa.DTO_Khoa;
 import clsdatabase.DatabaseConnection;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public final class fKhoa extends javax.swing.JFrame {
 
     BLL_Khoa bll = new BLL_Khoa();
     DTO_Khoa dto = new DTO_Khoa();
     DALL_Khoa dal = new DALL_Khoa();
-    ArrayList<DTO_Khoa> arr = new ArrayList<>();
+    ArrayList<DTO_Khoa> array = new ArrayList<>();
+    Random rb = new Random();
 
     PreparedStatement ps = null;
     DatabaseConnection db = null;
@@ -32,40 +35,27 @@ public final class fKhoa extends javax.swing.JFrame {
 
     public fKhoa() {
         initComponents();
-        // Combo();
+        Combo();
         LoadKhoa();
-        GetMaPhongBan();
+        RandomKhoa();
     }
 
-    public void GetMaPhongBan() {
-        cbbkhoa.removeAllItems();
-        try {
-            String sql = "select * from PHONGBAN";
-            db = new DatabaseConnection();
-            con = db.getConnection();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                String maloai = rs.getString("MAPHONGBAN");
-                String tenphong = rs.getString("TENPHONGBAN");
-                String c = maloai + " | "+ tenphong ;
-                cbbkhoa.addItem(c);
-            }
-        } catch (SQLException e) {
-
-        }
+    public void RandomKhoa() {
+        int code = (int) Math.floor(((Math.random() * 1000) + 500));
+        String a = Integer.toString(code);
+        txbmakhoa.setText(a);
     }
 
     public void LoadKhoa() {
-        String header[] = {"Mã Phòng Ban", "Mã Khoa", "Tên Khoa", "Số Điện Thoại"};
-         DefaultTableModel model = new DefaultTableModel(header, 0);
-        arr = bll.GetListKhoa();
-        for (int i = 0; i < arr.size(); i++) {
-            dto = arr.get(i);
-            int a = dto.getMaphongban();
-            int b = dto.getMakhoa();
-            String c = dto.getTenkhoa();
-            int d = dto.getSDT();
+        String header[] = {"Mã Khoa", "Tên Khoa", "Mã Phòng Ban", "Số Điện Thoại"};
+        DefaultTableModel model = new DefaultTableModel(header, 0);
+        array = bll.GetListKhoa();
+        for (int i = 0; i < array.size(); i++) {
+            dto = array.get(i);
+            int a = dto.getMakhoa();
+            String b = dto.getTenkhoa();
+            int c = dto.getMaphongban();
+            String d = dto.getSodienthoai();
             Object[] row = {a, b, c, d};
             model.addRow(row);
         }
@@ -103,12 +93,20 @@ public final class fKhoa extends javax.swing.JFrame {
 
         tablekhoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
 
             }
         ));
+        tablekhoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablekhoaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablekhoa);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -147,7 +145,9 @@ public final class fKhoa extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(102, 102, 0));
         jLabel4.setText("Mã khoa");
 
-        cbbkhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0" }));
+        txbmakhoa.setEditable(false);
+
+        cbbkhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn" }));
         cbbkhoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbkhoaActionPerformed(evt);
@@ -167,7 +167,7 @@ public final class fKhoa extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txbmakhoa)
                     .addComponent(cbbkhoa, 0, 162, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -186,7 +186,7 @@ public final class fKhoa extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txbtenkhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbkhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
@@ -260,24 +260,22 @@ public final class fKhoa extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-//    private void Combo() {
-//        HashMap<String, Integer> map = bll.Fillcombo();
-//        for (String str : map.keySet()) {
-//            cbbkhoa.addItem(str);
-//            //        HashMap<String, Integer> map = bll.Fillcombo();
-////         int maphongban= map....
-//            //       jTextField2.setText(map.get(cbbkhoa.getSelectedItem().toString()).toString());
-//        }
-//    }
+    private void Combo() {
+        HashMap<String, Integer> map = bll.Fillcombo();
+        for (String str : map.keySet()) {
+            cbbkhoa.addItem(str);
+
+        }
+    }
 
     private void cbbkhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbkhoaActionPerformed
 
@@ -288,21 +286,35 @@ public final class fKhoa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void check(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_check
-       
-        dto.setMakhoa(Integer.parseInt(txbmakhoa.getText()));
-        dto.setTenkhoa(txbtenkhoa.getText());
-        dto.setSDT(Integer.parseInt(txbsdt.getText()));
-        if (dto.getTenkhoa().isEmpty()) {
-            JOptionPane.showMessageDialog(this, " Tên khoa không được bỏ trống");
-        } else {
-            int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới Khoa này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (result == JOptionPane.YES_OPTION) {
-                bll.InsertKhoa(dto.getMaphongban(), dto.getMakhoa(), dto.getTenkhoa(), dto.getSDT());
-                JOptionPane.showMessageDialog(null, "Thêm khoathành công");
+        try {
+            HashMap<String, Integer> map = bll.Fillcombo();
+            dto.setMakhoa(Integer.parseInt(txbmakhoa.getText()));
+            dto.setTenkhoa(txbtenkhoa.getText());
+            dto.setMaphongban(Integer.parseInt(map.get(cbbkhoa.getSelectedItem().toString()).toString()));
+            dto.setSodienthoai(txbsdt.getText());
+            if (dto.getTenkhoa().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên Khoa không được bỏ trống");
+                txbtenkhoa.requestFocus();
+            } else if (dto.getSodienthoai().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Số điện thoại Khoa không được bỏ trống");
+                txbsdt.requestFocus();
+            } else {
+                bll.InsertKhoa(dto.getMakhoa(), dto.getTenkhoa(), dto.getMaphongban(), dto.getSodienthoai());
+                JOptionPane.showMessageDialog(this, "Thêm Khoa thành công");
                 LoadKhoa();
             }
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, " Không thành công !!!");
         }
     }//GEN-LAST:event_check
+
+    private void tablekhoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablekhoaMouseClicked
+        int i = tablekhoa.getSelectedRow();
+        TableModel tb = tablekhoa.getModel();
+         txbmakhoa.setText(tb.getValueAt(i, 0).toString());
+         txbtenkhoa.setText(tb.getValueAt(i, 1).toString());
+         txbsdt.setText(tb.getValueAt(i, 2).toString());
+    }//GEN-LAST:event_tablekhoaMouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
