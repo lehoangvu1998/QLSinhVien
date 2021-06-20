@@ -144,8 +144,8 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txbtenkhoa" max="32767" attributes="0"/>
-                      <Component id="txbsdt" pref="161" max="32767" attributes="0"/>
+                      <Component id="txbtenkhoa" pref="161" max="32767" attributes="0"/>
+                      <Component id="txbsdt" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               </Group>
@@ -224,8 +224,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txbtenkhoa">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txbsdt">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Nh&#x1ead;p v&#xe0;o t&#xea;n khoa "/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbbkhoa">
           <Properties>
@@ -241,6 +242,14 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txbsdt">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Nh&#x1ead;p v&#xe0;o s&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txbsdtKeyPressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

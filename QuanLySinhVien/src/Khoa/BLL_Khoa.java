@@ -19,8 +19,8 @@ public class BLL_Khoa {
          return  dal.InsertKhoa(makhoa, tenkhoa, maphongban, sdt);
      }
      
-       public int Updatekhoa(String tenkhoa, String sdt, int maphongban, int makhoa) {
-           return dal.Updatekhoa(tenkhoa, sdt, maphongban, makhoa);
+       public int Updatekhoa(String tenkhoa, String sdt, int makhoa) {
+           return dal.Updatekhoa(tenkhoa, sdt, makhoa);
        }
         public int Delete(int makhoa) {
             return dal.Delete(makhoa);

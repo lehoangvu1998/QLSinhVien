@@ -80,17 +80,16 @@ public class DALL_Khoa {
         return result;
     }
 
-    public int Updatekhoa(String tenkhoa, String sdt, int maphongban, int makhoa) {
+    public int Updatekhoa(String tenkhoa, String sdt, int makhoa) {
         int result = 0;
-        String sql = " UPDATE KHOA SET TENKHOA = ? , SDT = ?, MAPHONGBAN = ? WHERE MAKHOA = ?";
+        String sql = " UPDATE KHOA SET TENKHOA = ? , SDT = ?  WHERE MAKHOA = ?";
         try {
             db = new DatabaseConnection();
             con = db.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, tenkhoa);
             ps.setString(2, sdt);
-            ps.setInt(3, maphongban);
-            ps.setInt(4, makhoa);
+            ps.setInt(3, makhoa);
             result = ps.executeUpdate();
         } catch (SQLException e) {
         }

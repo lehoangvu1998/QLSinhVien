@@ -21,31 +21,31 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public final class fKhoa extends javax.swing.JFrame {
-
+    
     BLL_Khoa bll = new BLL_Khoa();
     DTO_Khoa dto = new DTO_Khoa();
     DALL_Khoa dal = new DALL_Khoa();
     ArrayList<DTO_Khoa> array = new ArrayList<>();
     Random rb = new Random();
-
+    
     PreparedStatement ps = null;
     DatabaseConnection db = null;
     ResultSet rs = null;
     Connection con = null;
-
+    
     public fKhoa() {
         initComponents();
         Combo();
         LoadKhoa();
         RandomKhoa();
     }
-
+    
     public void RandomKhoa() {
         int code = (int) Math.floor(((Math.random() * 1000) + 500));
         String a = Integer.toString(code);
         txbmakhoa.setText(a);
     }
-
+    
     public void LoadKhoa() {
         String header[] = {"Mã Khoa", "Tên Khoa", "Mã Phòng Ban", "Số Điện Thoại"};
         DefaultTableModel model = new DefaultTableModel(header, 0);
@@ -64,7 +64,7 @@ public final class fKhoa extends javax.swing.JFrame {
         tablekhoa.getTableHeader().setResizingAllowed(false);
         tablekhoa.getTableHeader().setReorderingAllowed(false);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -79,8 +79,8 @@ public final class fKhoa extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txbmakhoa = new javax.swing.JTextField();
         txbtenkhoa = new javax.swing.JTextField();
-        txbsdt = new javax.swing.JTextField();
         cbbkhoa = new javax.swing.JComboBox<>();
+        txbsdt = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         btndelete = new javax.swing.JButton();
@@ -147,10 +147,19 @@ public final class fKhoa extends javax.swing.JFrame {
 
         txbmakhoa.setEditable(false);
 
+        txbtenkhoa.setToolTipText("Nhập vào tên khoa ");
+
         cbbkhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn" }));
         cbbkhoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbkhoaActionPerformed(evt);
+            }
+        });
+
+        txbsdt.setToolTipText("Nhập vào số điện thoại");
+        txbsdt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txbsdtKeyPressed(evt);
             }
         });
 
@@ -173,8 +182,8 @@ public final class fKhoa extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txbtenkhoa)
-                    .addComponent(txbsdt, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
+                    .addComponent(txbtenkhoa, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                    .addComponent(txbsdt))
                 .addGap(54, 54, 54))
         );
         jPanel2Layout.setVerticalGroup(
@@ -283,7 +292,7 @@ public final class fKhoa extends javax.swing.JFrame {
         HashMap<String, Integer> map = bll.Fillcombo();
         for (String str : map.keySet()) {
             cbbkhoa.addItem(str);
-
+            
         }
     }
 
@@ -312,9 +321,12 @@ public final class fKhoa extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, " Số điện thoại Khoa không được bỏ trống");
                 txbsdt.requestFocus();
             } else {
-                bll.InsertKhoa(dto.getMakhoa(), dto.getTenkhoa(), dto.getMaphongban(), dto.getSodienthoai());
-                JOptionPane.showMessageDialog(this, "Thêm Khoa thành công");
-                LoadKhoa();
+                int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới khoa này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    bll.InsertKhoa(dto.getMakhoa(), dto.getTenkhoa(), dto.getMaphongban(), dto.getSodienthoai());
+                    JOptionPane.showMessageDialog(this, "Thêm Khoa thành công");
+                    LoadKhoa();
+                }
             }
         } catch (HeadlessException | NumberFormatException e) {
             JOptionPane.showMessageDialog(this, " Không thành công !!!");
@@ -331,6 +343,7 @@ public final class fKhoa extends javax.swing.JFrame {
 
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
         try {
+            dto.setMakhoa(Integer.parseInt(txbmakhoa.getText()));
             dto.setTenkhoa(txbtenkhoa.getText());
             dto.setSodienthoai(txbsdt.getText());
             if (dto.getTenkhoa().isEmpty()) {
@@ -340,9 +353,12 @@ public final class fKhoa extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, " Số điện thoại không được bỏ trống ");
                 txbsdt.requestFocus();
             } else {
-                bll.Updatekhoa(dto.getTenkhoa(), dto.getSodienthoai(), dto.getMaphongban(), dto.getMakhoa());
-                JOptionPane.showMessageDialog(this, " Cập nhật thành công ");
-                LoadKhoa();
+                int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn sửa đổi Khoa này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    bll.Updatekhoa(dto.getTenkhoa(), dto.getSodienthoai(), dto.getMakhoa());
+                    JOptionPane.showMessageDialog(this, " Cập nhật thành công ");
+                    LoadKhoa();
+                }
             }
         } catch (HeadlessException | NumberFormatException e) {
             JOptionPane.showMessageDialog(this, " Lỗi ");
@@ -361,6 +377,15 @@ public final class fKhoa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btndeleteActionPerformed
 
+    private void txbsdtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txbsdtKeyPressed
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txbsdt.setEditable(false);
+        } else {
+            txbsdt.setEditable(true);
+        }
+    }//GEN-LAST:event_txbsdtKeyPressed
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new fKhoa().setVisible(true);
