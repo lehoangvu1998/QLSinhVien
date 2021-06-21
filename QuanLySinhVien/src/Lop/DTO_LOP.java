@@ -4,7 +4,7 @@ public class DTO_LOP {
 
     private int malop;
     private String tenlop;
-    private int makhoa;
+    private String tenkhoa;
     private String hedaotao;
     private int khoa;
     private int nam;
@@ -12,10 +12,10 @@ public class DTO_LOP {
     public DTO_LOP() {
     }
 
-    public DTO_LOP(int malop, String tenlop, int makhoa, String hedaotao, int khoa, int nam) {
+    public DTO_LOP(int malop, String tenlop, String tenkhoa, String hedaotao, int khoa, int nam) {
         this.malop = malop;
         this.tenlop = tenlop;
-        this.makhoa = makhoa;
+        this.tenkhoa = tenkhoa;
         this.hedaotao = hedaotao;
         this.khoa = khoa;
         this.nam = nam;
@@ -37,12 +37,12 @@ public class DTO_LOP {
         this.tenlop = tenlop;
     }
 
-    public int getMakhoa() {
-        return makhoa;
+    public String getTenkhoa() {
+        return tenkhoa;
     }
 
-    public void setMakhoa(int makhoa) {
-        this.makhoa = makhoa;
+    public void setTenkhoa(String tenkhoa) {
+        this.tenkhoa = tenkhoa;
     }
 
     public String getHedaotao() {
