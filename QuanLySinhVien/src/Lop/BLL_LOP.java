@@ -1,6 +1,7 @@
 package Lop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BLL_LOP {
 
@@ -12,5 +13,9 @@ public class BLL_LOP {
 
     public int InsertClass(int malop, String tenlop, int khoa, String hedaotao, int nam, int makhoa) {
         return dal.InsertClass(malop, tenlop, khoa, hedaotao, nam, makhoa);
+    }
+    
+    public HashMap<String, Integer> fillcombo() {
+        return dal.fillcombo();
     }
 }

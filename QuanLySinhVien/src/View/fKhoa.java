@@ -150,11 +150,6 @@ public final class fKhoa extends javax.swing.JFrame {
         txbtenkhoa.setToolTipText("Nhập vào tên khoa ");
 
         cbbkhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn" }));
-        cbbkhoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbkhoaActionPerformed(evt);
-            }
-        });
 
         txbsdt.setToolTipText("Nhập vào số điện thoại");
         txbsdt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -295,10 +290,6 @@ public final class fKhoa extends javax.swing.JFrame {
             
         }
     }
-
-    private void cbbkhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbkhoaActionPerformed
-
-    }//GEN-LAST:event_cbbkhoaActionPerformed
 
     private void BtbResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtbResetActionPerformed
         RandomKhoa();

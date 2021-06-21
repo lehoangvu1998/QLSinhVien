@@ -1,11 +1,13 @@
 package Lop;
 
+import Khoa.DTO_Khoa;
 import clsdatabase.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DAL_LOP {
 
@@ -13,6 +15,24 @@ public class DAL_LOP {
     PreparedStatement ps = null;
     ResultSet rs = null;
     Connection con = null;
+
+    public HashMap<String, Integer> fillcombo() {
+        HashMap<String, Integer> map = new HashMap<>();
+        try {
+            String sql = " SELECT MAKHOA, TENKHOA  FROM KHOA";
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            DTO_Khoa dto ;
+            while (rs.next()) {
+               dto = new DTO_Khoa(rs.getInt("MAKHOA"), rs.getString("TENKHOA"));
+               map.put(dto.getTenkhoa(), dto.getMakhoa());
+            }
+        } catch (SQLException e) {
+        }
+        return map;
+    }
 
     public ArrayList<DTO_LOP> GetlistLop() {
         ArrayList<DTO_LOP> list = new ArrayList<>();

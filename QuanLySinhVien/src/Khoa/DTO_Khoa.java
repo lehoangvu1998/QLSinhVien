@@ -5,6 +5,7 @@ public class DTO_Khoa {
     private String tenkhoa;
     private String sodienthoai;
 
+
     public int getMakhoa() {
         return makhoa;
     }
@@ -18,6 +19,12 @@ public class DTO_Khoa {
         this.tenkhoa = tenkhoa;
         this.sodienthoai = sodienthoai;
     }
+
+    public DTO_Khoa(int makhoa, String tenkhoa) {
+        this.makhoa = makhoa;
+        this.tenkhoa = tenkhoa;
+    }
+
 
     public void setMakhoa(int makhoa) {
         this.makhoa = makhoa;
