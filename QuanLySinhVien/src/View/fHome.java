@@ -99,6 +99,11 @@ public final class fHome extends javax.swing.JFrame {
         menuclass.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
 
         menuclasss.setText("Quản lý lớp");
+        menuclasss.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuclasssActionPerformed(evt);
+            }
+        });
         menuclass.add(menuclasss);
 
         menumonhoc.setText("Quản lý môn học");
@@ -167,9 +172,15 @@ public final class fHome extends javax.swing.JFrame {
     }//GEN-LAST:event_mnsinhvenActionPerformed
 
     private void menukhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menukhoaActionPerformed
-        fKhoa f = new  fKhoa();
+        fKhoa f = new fKhoa();
         f.show();
     }//GEN-LAST:event_menukhoaActionPerformed
+
+    private void menuclasssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuclasssActionPerformed
+        this.dispose();
+        fLop f = new fLop();
+        f.show();
+    }//GEN-LAST:event_menuclasssActionPerformed
 
     private void Datehouse() {
 //        DateFormat df = new SimpleDateFormat("dd-M-yyyy hh:mm");

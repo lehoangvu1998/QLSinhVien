@@ -18,4 +18,7 @@ public class BLL_LOP {
     public HashMap<String, Integer> fillcombo() {
         return dal.fillcombo();
     }
+     public int DeleteClass(int malop) {
+         return  dal.DeleteClass(malop);
+     }
 }

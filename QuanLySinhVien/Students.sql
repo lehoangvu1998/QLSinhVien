@@ -26,7 +26,7 @@ CREATE TABLE LOP
 	MALOP INT  PRIMARY KEY,
 	TENLOP NVARCHAR (10),
 	KHOA INT,
-	HEDAOTAO NVARCHAR (15),
+	HEDAOTAO NVARCHAR (50),
 	NAMNHAPHOC INT,
 	MAKHOA INT,
 	FOREIGN KEY (MAKHOA) REFERENCES KHOA (MAKHOA),
@@ -116,7 +116,7 @@ GO
 --NGAYVAOTRUONG DATE,
 set dateformat dmy
 
-INSERT INTO KHOA VALUES (?,?,?,?)
+
 
 INSERT INTO USERS VALUES (123, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 0, null)
 INSERT INTO USERS VALUES (234, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', null,  null, null, null, 1, null)
@@ -125,19 +125,7 @@ INSERT INTO USERS VALUES (345, N' Monkey D Luffy', '0768170398',  ' 17/03/1998',
 
 
 select TENPHONGBAN from PHONGBAN
-
-insert into KHOA values (958, N'CNTT', null, '098765432')
 select * from KHOA
 select * from PHONGBAN
-insert INTO PHONGBAN 
-values (123, N'ABC')
-insert PHONGBAN 
-values (234, N'BCD')
-
-DELETE KHOA WHERE MAKHOA = '45345'
 SELECT MAPHONGBAN, MAKHOA, TENKHOA, SDT FROM KHOA
-
-
-
-select * from KHOA
-delete PHONGBAN where MAPHONGBAN = '789'
+select * from LOP

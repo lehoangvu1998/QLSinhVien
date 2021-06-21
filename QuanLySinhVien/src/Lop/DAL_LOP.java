@@ -24,10 +24,10 @@ public class DAL_LOP {
             con = db.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            DTO_Khoa dto ;
+            DTO_Khoa dto;
             while (rs.next()) {
-               dto = new DTO_Khoa(rs.getInt("MAKHOA"), rs.getString("TENKHOA"));
-               map.put(dto.getTenkhoa(), dto.getMakhoa());
+                dto = new DTO_Khoa(rs.getInt("MAKHOA"), rs.getString("TENKHOA"));
+                map.put(dto.getTenkhoa(), dto.getMakhoa());
             }
         } catch (SQLException e) {
         }
@@ -74,5 +74,19 @@ public class DAL_LOP {
         } catch (SQLException e) {
         }
         return result;
+    }
+
+    public int DeleteClass(int malop) {
+        int a = 0;
+        String sql = "DELETE LOP WHERE MALOP = ?";
+        try {
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, malop);
+            a = ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+        return a;
     }
 }

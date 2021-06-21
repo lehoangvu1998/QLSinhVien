@@ -2,39 +2,35 @@ package View;
 
 import Lop.BLL_LOP;
 import Lop.DTO_LOP;
-import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public final class fLop extends javax.swing.JFrame {
 
     ArrayList<DTO_LOP> arrayList = new ArrayList<>();
     BLL_LOP bll = new BLL_LOP();
     DTO_LOP dto = new DTO_LOP();
-    Random rd = new Random();
 
     public fLop() {
         initComponents();
         LoadLop();
-        Randommalop();
         combo();
     }
 
-    private  void combo (){
-        HashMap<String, Integer> map = bll.fillcombo();
-        for (String s : map.keySet()) {
-            CBBKHOA.addItem(s);
-        }
-    }
-    
     private void Randommalop() {
         int code = (int) Math.floor(((Math.random() * 1000) + 500));
         String a = Integer.toString(code);
         txbmalop.setText(a);
+    }
 
+    private void combo() {
+        HashMap<String, Integer> map = bll.fillcombo();
+        for (String s : map.keySet()) {
+            cbbkhoa.addItem(s);
+        }
     }
 
     public void LoadLop() {
@@ -75,18 +71,20 @@ public final class fLop extends javax.swing.JFrame {
         txbmalop = new javax.swing.JTextField();
         txbtenlop = new javax.swing.JTextField();
         txbkhoa = new javax.swing.JTextField();
-        cbbhedaotao = new javax.swing.JComboBox<>();
         txbnam = new javax.swing.JTextField();
-        CBBKHOA = new javax.swing.JComboBox<>();
+        cbbhedaotao = new javax.swing.JComboBox<>();
+        cbbkhoa = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jTextField6 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         Btnadd = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Btndelete = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        BTnsavae = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,6 +98,11 @@ public final class fLop extends javax.swing.JFrame {
 
             }
         ));
+        tablelop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablelopMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablelop);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -147,8 +150,15 @@ public final class fLop extends javax.swing.JFrame {
 
         txbmalop.setEditable(false);
 
+        txbtenlop.setEditable(false);
+
+        txbkhoa.setEditable(false);
+
+        txbnam.setEditable(false);
+
         cbbhedaotao.setMaximumRowCount(3);
         cbbhedaotao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đại học chính quy", "Cao đẳng", "Hệ vừa học vừa làm", " " }));
+        cbbhedaotao.setSelectedIndex(-1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -177,9 +187,9 @@ public final class fLop extends javax.swing.JFrame {
                         .addComponent(jLabel4)))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbbhedaotao, 0, 159, Short.MAX_VALUE)
                     .addComponent(txbnam)
-                    .addComponent(CBBKHOA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbbhedaotao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbbkhoa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -202,7 +212,7 @@ public final class fLop extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel6)
                     .addComponent(txbkhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBBKHOA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbkhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -247,38 +257,59 @@ public final class fLop extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Xóa");
+        Btndelete.setText("Xóa");
+        Btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtndeleteActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Cập nhật");
 
         jButton5.setText("Làm lại");
 
+        jButton2.setText("Sửa");
+
+        BTnsavae.setText("Lưu");
+        BTnsavae.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTnsavaeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(Btnadd))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(Btnadd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BTnsavae, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Btndelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Btnadd)
-                    .addComponent(jButton3))
-                .addGap(48, 48, 48)
+                    .addComponent(Btndelete))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2)
+                    .addComponent(jButton4))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(BTnsavae)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -317,35 +348,82 @@ public final class fLop extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnaddActionPerformed
-
-        dto.setMalop(Integer.parseInt(txbmalop.getText()));
-        dto.setTenlop(txbtenlop.getText());
-        dto.setHedaotao(cbbhedaotao.getSelectedItem().toString());
-        dto.setKhoa(Integer.parseInt(txbkhoa.getText()));;
-       
-        if (dto.getTenlop().isEmpty()) {
-            JOptionPane.showMessageDialog(null, " Tên Lớp không được để trống ");
-            txbtenlop.requestFocus();
-        } else if (dto.getHedaotao().isEmpty()) {
-            JOptionPane.showMessageDialog(null, " Hệ đào tạo không được để trống ");
-        } else if (dto.getKhoa() == 0) {
-             JOptionPane.showMessageDialog(null, " Khóa phải không được để trống và lấy nàm hiện hành VD : 2016 ");
-        }
+        Randommalop();
+        EnableText();
     }//GEN-LAST:event_BtnaddActionPerformed
 
-    public static void main(String args[]) {
+    private void EnableText() {
+        txbtenlop.setText("");
+        txbnam.setText("");
+        txbkhoa.setText("");
+        txbtenlop.requestFocus();
+        txbtenlop.setEditable(true);
+        txbkhoa.setEditable(true);
+        txbnam.setEditable(true);
+    }
 
+    private void DisableText() {
+        txbmalop.setText("");
+        txbtenlop.setText("");
+        txbnam.setText("");
+        txbkhoa.setText("");
+        txbtenlop.setEditable(false);
+        txbkhoa.setEditable(false);
+        txbnam.setEditable(false);
+    }
+
+    private void tablelopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelopMouseClicked
+        int i = tablelop.getSelectedRow();
+        TableModel tb = tablelop.getModel();
+        txbmalop.setText(tb.getValueAt(i, 1).toString());
+        txbtenlop.setText(tb.getValueAt(i, 2).toString());
+        txbkhoa.setText(tb.getValueAt(i, 3).toString());
+        cbbhedaotao.setSelectedItem(i);
+        txbnam.setText(tb.getValueAt(i, 5).toString());
+    }//GEN-LAST:event_tablelopMouseClicked
+
+    private void BTnsavaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTnsavaeActionPerformed
+        HashMap<String, Integer> map = bll.fillcombo();
+        dto.setMalop(Integer.parseInt(txbmalop.getText().trim()));
+        dto.setTenlop(txbtenlop.getText().trim());
+        dto.setKhoa(Integer.parseInt(txbkhoa.getText().trim()));
+        dto.setHedaotao(cbbhedaotao.getSelectedItem().toString().trim());
+        dto.setNam(Integer.parseInt(txbnam.getText().trim()));
+        dto.setMakhoa(Integer.parseInt(map.get(cbbkhoa.getSelectedItem().toString()).toString().trim()));
+        int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới khoa này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            bll.InsertClass(dto.getMalop(), dto.getTenlop(), dto.getKhoa(), dto.getHedaotao(), dto.getNam(), dto.getMakhoa());
+            JOptionPane.showMessageDialog(this, " Thêm lớp thành công");
+            LoadLop();
+            DisableText();
+        }
+    }//GEN-LAST:event_BTnsavaeActionPerformed
+
+    private void BtndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtndeleteActionPerformed
+        dto.setMalop(Integer.parseInt(txbmalop.getText()));
+        int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới khoa này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            bll.DeleteClass(dto.getMalop());
+            LoadLop();
+        } else {
+            JOptionPane.showMessageDialog(this, " Xóa Không thành công ");
+        }
+    }//GEN-LAST:event_BtndeleteActionPerformed
+
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new fLop().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTnsavae;
     private javax.swing.JButton Btnadd;
-    private javax.swing.JComboBox<String> CBBKHOA;
+    private javax.swing.JButton Btndelete;
     private javax.swing.JComboBox<String> cbbhedaotao;
+    private javax.swing.JComboBox<String> cbbkhoa;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
