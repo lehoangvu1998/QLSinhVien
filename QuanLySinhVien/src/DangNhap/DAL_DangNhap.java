@@ -29,8 +29,7 @@ public class DAL_DangNhap {
         return false;
     }
 
-    //Viết tách ra hình dung câu sql này chưa rồi nha
-    //VD có get name của viết giống vầy sửa kiểu dữ liệu lại thôi ok để làm tiep62 :v ok t out đây ok thasnk
+
     public int getRole(String usr) {
         String query = "select ROLE from USERS where MAUSERS = ?";
         try {
