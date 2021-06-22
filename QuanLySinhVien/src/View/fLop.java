@@ -2,36 +2,37 @@ package View;
 
 import Lop.BLL_LOP;
 import Lop.DTO_LOP;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public final class fLop extends javax.swing.JFrame {
-    
+
     ArrayList<DTO_LOP> arrayList = new ArrayList<>();
     BLL_LOP bll = new BLL_LOP();
     DTO_LOP dto = new DTO_LOP();
-    
+
     public fLop() {
         initComponents();
         LoadLop();
         combo();
     }
-    
+
     private void Randommalop() {
         int code = (int) Math.floor(((Math.random() * 1000) + 500));
         String a = Integer.toString(code);
         txbmalop.setText(a);
     }
-    
+
     private void combo() {
         HashMap<String, Integer> map = bll.fillcombo();
         for (String s : map.keySet()) {
             cbbkhoa.addItem(s);
         }
     }
-    
+
     public void LoadLop() {
         String header[] = {"Khoa", "Mã lớp", "Tên lớp", "Khóa", "Hệ đào tạo", "Năm"};
         DefaultTableModel model = new DefaultTableModel(header, 0);
@@ -52,7 +53,7 @@ public final class fLop extends javax.swing.JFrame {
         tablelop.getTableHeader().setReorderingAllowed(false);
         tablelop.getTableHeader().setResizingAllowed(false);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -376,7 +377,7 @@ public final class fLop extends javax.swing.JFrame {
         cbbkhoa.setEnabled(true);
         cbbhedaotao.setEnabled(true);
     }//GEN-LAST:event_BtnaddActionPerformed
-    
+
     private void EnableText() {
         txbtenlop.setText("");
         txbnam.setText("");
@@ -386,7 +387,7 @@ public final class fLop extends javax.swing.JFrame {
         txbkhoa.setEditable(true);
         txbnam.setEditable(true);
     }
-    
+
     private void DisableText() {
         txbmalop.setText("");
         txbtenlop.setText("");
@@ -398,7 +399,7 @@ public final class fLop extends javax.swing.JFrame {
     }
 
     private void tablelopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelopMouseClicked
-        int i = tablelop.getSelectedRow();       
+        int i = tablelop.getSelectedRow();
         cbbkhoa.setSelectedItem(tablelop.getValueAt(i, 0).toString());
         txbmalop.setText(tablelop.getValueAt(i, 1).toString());
         txbtenlop.setText(tablelop.getValueAt(i, 2).toString());
@@ -410,34 +411,43 @@ public final class fLop extends javax.swing.JFrame {
     }//GEN-LAST:event_tablelopMouseClicked
 
     private void BTnsavaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTnsavaeActionPerformed
-        HashMap<String, Integer> map = bll.fillcombo();
-        dto.setMalop(Integer.parseInt(txbmalop.getText().trim()));
-        dto.setTenlop(txbtenlop.getText().trim());
-        dto.setKhoa(Integer.parseInt(txbkhoa.getText().trim()));
-        dto.setHedaotao(cbbhedaotao.getSelectedItem().toString().trim());
-        dto.setNam(Integer.parseInt(txbnam.getText().trim()));
-        dto.setTenkhoa(map.get(cbbkhoa.getSelectedItem().toString()).toString().trim());
-        if (dto.getTenlop().isEmpty()) {
-            JOptionPane.showMessageDialog(this, " Tên Lớp không được rỗng ");
-        } else {
-            int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới Lớp này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (result == JOptionPane.YES_OPTION) {
-                bll.InsertClass(dto.getMalop(), dto.getTenlop(), dto.getKhoa(), dto.getHedaotao(), dto.getNam(), dto.getTenkhoa());
-                JOptionPane.showMessageDialog(this, " Thêm Lớp thành công");
-                LoadLop();
-                DisableText();
+        try {
+            HashMap<String, Integer> map = bll.fillcombo();
+            dto.setMalop(Integer.parseInt(txbmalop.getText().trim()));
+            dto.setTenlop(txbtenlop.getText().trim());
+            dto.setKhoa(Integer.parseInt(txbkhoa.getText().trim()));
+            dto.setHedaotao(cbbhedaotao.getSelectedItem().toString().trim());
+            dto.setNam(Integer.parseInt(txbnam.getText().trim()));
+            dto.setTenkhoa(map.get(cbbkhoa.getSelectedItem().toString()).toString().trim());
+            if (dto.getTenlop().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên Lớp không được rỗng ");
+                txbtenlop.requestFocus();
+            } else {
+                int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới Lớp này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    bll.InsertClass(dto.getMalop(), dto.getTenlop(), dto.getKhoa(), dto.getHedaotao(), dto.getNam(), dto.getTenkhoa());
+                    JOptionPane.showMessageDialog(this, " Thêm Lớp thành công");
+                    LoadLop();
+                    DisableText();
+                }
             }
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, " Nhập đầy đủ các trường ");
         }
     }//GEN-LAST:event_BTnsavaeActionPerformed
 
     private void BtndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtndeleteActionPerformed
-        dto.setMalop(Integer.parseInt(txbmalop.getText()));
-        int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn xóa Lớp này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
-            bll.DeleteClass(dto.getMalop());
-            LoadLop();
-        } else {
-            JOptionPane.showMessageDialog(this, " Xóa không thành công ");
+        try {
+            dto.setMalop(Integer.parseInt(txbmalop.getText()));
+            int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn xóa Lớp này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                bll.DeleteClass(dto.getMalop());
+                LoadLop();
+            } else {
+                JOptionPane.showMessageDialog(this, " Xóa không thành công ");
+            }
+        } catch (HeadlessException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, " Không thực hiện được ");
         }
     }//GEN-LAST:event_BtndeleteActionPerformed
 
@@ -445,7 +455,7 @@ public final class fLop extends javax.swing.JFrame {
         EnableText();
         Randommalop();
     }//GEN-LAST:event_btnresetActionPerformed
-    
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new fLop().setVisible(true);
