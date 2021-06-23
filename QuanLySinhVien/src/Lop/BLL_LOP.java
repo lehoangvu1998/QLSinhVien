@@ -21,4 +21,8 @@ public class BLL_LOP {
      public int DeleteClass(int malop) {
          return  dal.DeleteClass(malop);
      }
+     
+    public int UpdateClass (String tenlop, int khoa, String hedaotao,int nam, int malop) {
+        return   dal.UpdateClass(tenlop, khoa, hedaotao, nam, malop);
+    }
 }

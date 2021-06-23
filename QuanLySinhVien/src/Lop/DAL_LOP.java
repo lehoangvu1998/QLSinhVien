@@ -76,6 +76,24 @@ public class DAL_LOP {
         }
         return result;
     }
+    
+    public int UpdateClass (String tenlop, int khoa, String hedaotao,int nam, int malop) {
+        int result = 0 ;
+        String sql = "  UPDATE LOP SET TENLOP = ? , KHOA = ?, HEDAOTAO = ?, NAMNHAPHOC= ? WHERE MALOP = ?";
+        try {
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, tenlop);
+            ps.setInt(2, khoa);
+            ps.setString(3, hedaotao);
+            ps.setInt(4, nam);
+            ps.setInt(5, malop);
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+        return  result;
+    }
 
     public int DeleteClass(int malop) {
         int a = 0;
