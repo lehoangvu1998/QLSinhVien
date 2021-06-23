@@ -12,15 +12,25 @@ public class BLL_SinhVien {
         return dal.getListSinhvien();
     }
 
-    public int insertSinhVien(int mssv, String hoten, String sodienthoai, Date birthday, String email, String diachi, String matkhau, String hocvan, int makhoa, int malop, int maphongban, int role, Date ngayvaotruong, String hotenthannhan, String sodienthoaithannhan, String quanhe, int mathannhan) {
-        return dal.insertSinhVien(mssv, hoten, sodienthoai, birthday, email, diachi, matkhau, hocvan, makhoa, malop, maphongban, role, ngayvaotruong, hotenthannhan, sodienthoaithannhan, quanhe, mathannhan);
-    }
-    
-    public HashMap<String, Integer> fillcombo() {
-        return  dal.fillcombo();
+    public HashMap<String, Integer> loadPhongban() {
+        return dal.loadPhongban();
     }
 
-     public HashMap<String, Integer> fillLopMap() {
-         return dal.fillLopMap();
-     }
+    public int insertSinhVien(int mssv, String hoten, String dienthoai, Date ngaysinh, String email, String diachi, String matkhau, String hocvan, int makhoa, int malop, int maphongban, int role, Date ngayvaotruong) {
+        int result = dal.insertSinhVien(mssv, hoten, dienthoai, ngaysinh, email, diachi, matkhau, hocvan, makhoa, malop, maphongban, role, ngayvaotruong);
+        return result;
+    }
+
+    public int insertThanNhan(String hoten, String sodienthoai, String quanhe, int mathannhan) {
+        int result = dal.insertThanNhan(hoten, sodienthoai, quanhe, mathannhan);
+        return result;
+    }
+
+    public HashMap<String, Integer> fillcombo(int maphongban) {
+        return dal.fillcombo(maphongban);
+    }
+
+    public HashMap<String, Integer> fillLopMap() {
+        return dal.fillLopMap();
+    }
 }

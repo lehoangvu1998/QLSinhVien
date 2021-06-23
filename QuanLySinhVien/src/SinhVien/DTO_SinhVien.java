@@ -1,10 +1,19 @@
 package SinhVien;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 public class DTO_SinhVien {
 
-    private int mssv, mathannhan, malop, makhoa, maphongban;
+    private int mssv, mathannhan, malop, makhoa, maphongban, role;
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
     private String hoten, sdt, email, diachi, pass, hocvan, tenkhoa, tenlop, sdtthannhan, quanhe, tenthannhan;
     private Date date, ngayvaotruong;
 
@@ -151,5 +160,5 @@ public class DTO_SinhVien {
     public void setNgayvaotruong(Date ngayvaotruong) {
         this.ngayvaotruong = ngayvaotruong;
     }
-
+    
 }

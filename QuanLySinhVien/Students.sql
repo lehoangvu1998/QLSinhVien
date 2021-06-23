@@ -1,3 +1,7 @@
+
+SELECT FORMAT (getdate(), 'dd-MM-yyyy') as date
+GO
+
 CREATE DATABASE QLSINHVIEN
 GO
 USE QLSINHVIEN
@@ -125,13 +129,37 @@ INSERT INTO USERS VALUES (345, N' Monkey D Luffy', '0768170398',  ' 17/03/1998',
 
 
 select TENPHONGBAN from PHONGBAN
-select * from KHOA
-select * from USERS
+
+
 select * from PHONGBAN
 SELECT MAPHONGBAN, MAKHOA, TENKHOA, SDT FROM KHOA
 select * from USERS
-
+INSERT INTO USERS VALUES (0000, N' Monkey D Luffy', '0768170398',  ' 17/03/1998', 'lehoangg1703@gmail.com',  N' Thuyền Sunny Thousand', '123', N'Sinh viên',  1052, 756, null, 0,  ' 17/03/1998')
+select * from KHOA
+select * from USERS
 SELECT  us.MAUSERS, us.HOTEN, us.SDT, us.NGAYSINH, us.EMAIL, us.DIACHI, us.PASS, us.HOCVAN, us.ROLE, us.NGAYVAOTRUONG, l.TENLOP, kh.TENKHOA, tn.TENTHANNHAN, tn.QUANHE, tn.SDTTHANNHAN
 FROM USERS us, KHOA kh, LOP l, THANNHAN tn
 WHERE (kh.MAKHOA = us.MAKHOA) AND  
 				(l.MALOP = us.MALOP) AND (tn.MAUSERS = us.MAUSERS)
+SELECT MALOP, TENLOP  FROM LOP
+select kh.TENKHOA, lp.MALOP, lp.TENLOP, lp.KHOA, lp.HEDAOTAO, lp.NAMNHAPHOC from KHOA kh, LOP lp where kh.MAKHOA = lp.MAKHOA
+
+select* from THANNHAN
+insert THANNHAN values (N'Ronaldo', '098670179', N'ba', 0)
+
+select * from USERS
+
+
+insert USERS (MAUSERS, HOTEN, SDT, NGAYSINH, EMAIL, DIACHI, PASS, HOCVAN, MAKHOA, MALOP, MAPHONGBAN, ROLE, NGAYVAOTRUONG)
+values (124, N'Nguyễn Văn A', '021312333', '24/03/1998', 'abc@gmail.com','TP.HCM', '24031998', N'Sinh viên', null, null, null, 2, '24/03/2021')
+
+select * from PHONGBAN
+select * from KHOA
+
+select sv.HOTEN, sv.MAKHOA
+from PHONGBAN pb, KHOA kh, USERS sv 
+where pb.MAPHONGBAN = kh.MAPHONGBAN and kh.MAKHOA = sv.MAKHOA and sv.MAPHONGBAN = 475374
+
+select *
+from USERS sv, THANNHAN tn
+where sv.MAUSERS = tn.MAUSERS and tn.MAUSERS = 21978225
