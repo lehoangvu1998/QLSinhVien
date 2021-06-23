@@ -86,8 +86,6 @@ public final class fLop extends javax.swing.JFrame {
         btnedit = new javax.swing.JButton();
         BTnsavae = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách lớp", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(204, 0, 255))); // NOI18N
 
         tablelop.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N

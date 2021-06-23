@@ -126,6 +126,7 @@ INSERT INTO USERS VALUES (345, N' Monkey D Luffy', '0768170398',  ' 17/03/1998',
 
 select TENPHONGBAN from PHONGBAN
 select * from KHOA
+select * from USERS
 select * from PHONGBAN
 SELECT MAPHONGBAN, MAKHOA, TENKHOA, SDT FROM KHOA
 select * from USERS

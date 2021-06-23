@@ -1,9 +1,12 @@
 package SinhVien;
 
+import java.util.Date;
+
 public class DTO_SinhVien {
 
-    private int mssv;
-    private String hoten, sdt, date, email, diachi, pass, hocvan, tenkhoa, tenlop, ngayvaotruong, sdtthannhan, quanhe, tenthannhan;
+    private int mssv, mathannhan, malop, makhoa, maphongban;
+    private String hoten, sdt, email, diachi, pass, hocvan, tenkhoa, tenlop, sdtthannhan, quanhe, tenthannhan;
+    private Date date, ngayvaotruong;
 
     public int getMssv() {
         return mssv;
@@ -11,6 +14,38 @@ public class DTO_SinhVien {
 
     public void setMssv(int mssv) {
         this.mssv = mssv;
+    }
+
+    public int getMathannhan() {
+        return mathannhan;
+    }
+
+    public void setMathannhan(int mathannhan) {
+        this.mathannhan = mathannhan;
+    }
+
+    public int getMalop() {
+        return malop;
+    }
+
+    public void setMalop(int malop) {
+        this.malop = malop;
+    }
+
+    public int getMakhoa() {
+        return makhoa;
+    }
+
+    public void setMakhoa(int makhoa) {
+        this.makhoa = makhoa;
+    }
+
+    public int getMaphongban() {
+        return maphongban;
+    }
+
+    public void setMaphongban(int maphongban) {
+        this.maphongban = maphongban;
     }
 
     public String getHoten() {
@@ -27,14 +62,6 @@ public class DTO_SinhVien {
 
     public void setSdt(String sdt) {
         this.sdt = sdt;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getEmail() {
@@ -85,14 +112,6 @@ public class DTO_SinhVien {
         this.tenlop = tenlop;
     }
 
-    public String getNgayvaotruong() {
-        return ngayvaotruong;
-    }
-
-    public void setNgayvaotruong(String ngayvaotruong) {
-        this.ngayvaotruong = ngayvaotruong;
-    }
-
     public String getSdtthannhan() {
         return sdtthannhan;
     }
@@ -117,5 +136,20 @@ public class DTO_SinhVien {
         this.tenthannhan = tenthannhan;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getNgayvaotruong() {
+        return ngayvaotruong;
+    }
+
+    public void setNgayvaotruong(Date ngayvaotruong) {
+        this.ngayvaotruong = ngayvaotruong;
+    }
 
 }

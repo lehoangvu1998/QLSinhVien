@@ -33,6 +33,7 @@ public class DAL_LOP {
         }
         return map;
     }
+    
 
     public ArrayList<DTO_LOP> GetlistLop() {
         ArrayList<DTO_LOP> list = new ArrayList<>();

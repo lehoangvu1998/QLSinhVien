@@ -12,6 +12,11 @@ public class DTO_LOP {
     public DTO_LOP() {
     }
 
+    public DTO_LOP(int malop, String tenlop) {
+        this.malop = malop;
+        this.tenlop = tenlop;
+    }
+
     public DTO_LOP(int malop, String tenlop, String tenkhoa, String hedaotao, int khoa, int nam) {
         this.malop = malop;
         this.tenlop = tenlop;
