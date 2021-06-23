@@ -25,7 +25,6 @@ public class DTO_Khoa {
         this.tenkhoa = tenkhoa;
     }
 
-
     public void setMakhoa(int makhoa) {
         this.makhoa = makhoa;
     }
@@ -53,8 +52,4 @@ public class DTO_Khoa {
     public void setSodienthoai(String sodienthoai) {
         this.sodienthoai = sodienthoai;
     }
-
-
-
-
 }

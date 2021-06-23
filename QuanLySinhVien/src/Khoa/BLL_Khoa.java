@@ -15,14 +15,15 @@ public class BLL_Khoa {
         return dal.GetListKhoa();
     }
 
-     public int InsertKhoa(int makhoa, String tenkhoa, int maphongban, String sdt) {
-         return  dal.InsertKhoa(makhoa, tenkhoa, maphongban, sdt);
-     }
-     
-       public int Updatekhoa(String tenkhoa, String sdt, int makhoa) {
-           return dal.Updatekhoa(tenkhoa, sdt, makhoa);
-       }
-        public int Delete(int makhoa) {
-            return dal.Delete(makhoa);
-        }
+    public int InsertKhoa(int makhoa, String tenkhoa, int maphongban, String sdt) {
+        return dal.InsertKhoa(makhoa, tenkhoa, maphongban, sdt);
+    }
+
+    public int Updatekhoa(String tenkhoa, String sdt, int makhoa) {
+        return dal.Updatekhoa(tenkhoa, sdt, makhoa);
+    }
+
+    public int Delete(int makhoa) {
+        return dal.Delete(makhoa);
+    }
 }

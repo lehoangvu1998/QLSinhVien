@@ -43,7 +43,6 @@ public class DAL_LOP {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                // phai tao cai ten khoa trong dto nua
                 DTO_LOP dto = new DTO_LOP();
                 dto.setTenkhoa(rs.getString("TENKHOA"));
                 dto.setMalop(rs.getInt("MALOP"));

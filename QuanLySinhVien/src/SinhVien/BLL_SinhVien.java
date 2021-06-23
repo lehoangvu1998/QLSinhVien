@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package SinhVien;
 
-/**
- *
- * @author Luxury
- */
+import java.util.ArrayList;
+
 public class BLL_SinhVien {
-    
+
+    DAL_SinhVien dal = new DAL_SinhVien();
+
+    public ArrayList<DTO_SinhVien> getListSinhvien() {
+        return dal.getListSinhvien();
+    }
 }
