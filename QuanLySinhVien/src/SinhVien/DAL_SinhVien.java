@@ -41,7 +41,7 @@ public class DAL_SinhVien {
     public HashMap<String, Integer> fillLopMap() {
         HashMap<String, Integer> map1 = new HashMap<>();
         try {
-            String sql = " SELECT MALOP, TENLOP  FROM LOP";
+            String sql = " SELECT MALOP, TENLOP  FROM  LOP ";
             db = new DatabaseConnection();
             con = db.getConnection();
             ps = con.prepareStatement(sql);
