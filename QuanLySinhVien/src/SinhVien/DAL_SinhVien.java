@@ -178,4 +178,55 @@ public class DAL_SinhVien {
         }
         return result;
     }
+
+    public int UpdateSV( String hoten, String sdt, Date ngaysinh, String email, String diachi, String matkhau, String hocvan, int makhoa, int malop, int maphongban, int role, Date ngayvaotruong, int mssv) {
+        int result = 0;
+        String sql = " UPDATE USERS SET HOTEN = ?, SDT = ? , NGAYSINH= ?, EMAIL = ?, DIACHI = ?, PASS= ?, HOCVAN = ?, MAKHOA=?, MALOP =?, MAPHONGBAN = ?, ROLE = ?, NGAYVAOTRUONG =?   WHERE MAUSERS = ?";
+        try {
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, hoten);
+            ps.setString(2, sdt);
+            ps.setDate(3, ngaysinh);
+            ps.setString(4, email);
+            ps.setString(5, diachi);
+            ps.setString(6, matkhau);
+            ps.setString(7, hocvan);
+            ps.setInt(8, makhoa);
+            ps.setInt(9, malop);
+            ps.setInt(10, maphongban);
+            ps.setInt(11, role);
+            ps.setDate(12, ngayvaotruong);
+            ps.setInt(13, mssv);
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+        return result;
+    }
+
+    public int UpdateThanNhan(String hoten, String sodienthoai, String quanhe, int mathannhan) {
+        int result = 0;
+        String query_thannhan = " UPDATE THANNHAN SET TENTHANNHAN = ? , SDTTHANNHAN = ? ,QUANHE = ? WHERE MAUSERS = ?";
+        try {
+            db = new DatabaseConnection();
+            con = db.getConnection();
+            ps = con.prepareStatement(query_thannhan);
+            ps.setString(1, hoten);
+            ps.setString(2, sodienthoai);
+            ps.setString(3, quanhe);
+            ps.setInt(4, mathannhan);
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+        } finally {
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException e) {
+
+            }
+        }
+        return result;
+    }
 }

@@ -37,4 +37,12 @@ public class BLL_SinhVien {
     public int DeleteSV(int mssv) {
         return  dal.DeleteSV(mssv);
     }
+    
+     public int UpdateSV( String hoten, String sdt, Date ngaysinh, String email, String diachi, String matkhau, String hocvan, int makhoa, int malop, int maphongban, int role, Date ngayvaotruong, int mssv) {
+         return dal.UpdateSV(hoten, sdt, ngaysinh, email, diachi, matkhau, hocvan, makhoa, malop, maphongban, role, ngayvaotruong, mssv); 
+     }
+     
+      public int UpdateThanNhan(String hoten, String sodienthoai, String quanhe, int mathannhan)  {
+          return dal.UpdateThanNhan(hoten, sodienthoai, quanhe, mathannhan);
+      }
 }

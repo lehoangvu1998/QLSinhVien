@@ -70,7 +70,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="1469" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -131,20 +131,20 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnxoa" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnedit" min="-2" pref="65" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="btnsave" max="32767" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jButton4" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="BTNADD" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnxoa" min="-2" pref="73" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="BTNADD" max="32767" attributes="0"/>
+                              <Component id="btnedit" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="113" pref="113" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnupdate" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnsave" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnreset" alignment="1" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -154,15 +154,18 @@
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="BTNADD" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnxoa" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="68" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnedit" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnsave" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnupdate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnedit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnreset" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnxoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -176,10 +179,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertStudent"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnedit">
+        <Component class="javax.swing.JButton" name="btnupdate">
           <Properties>
-            <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+            <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnupdateActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnxoa">
           <Properties>
@@ -189,10 +195,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnxoaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="btnreset">
           <Properties>
             <Property name="text" type="java.lang.String" value="L&#xe0;m l&#x1ea1;i"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnresetActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnsave">
           <Properties>
@@ -200,6 +209,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnsaveActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnedit">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btneditActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -479,7 +496,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="99" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Phong ban"/>
+            <Property name="text" type="java.lang.String" value="Ph&#xf2;ng ban"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
@@ -523,7 +540,9 @@
         <Component class="javax.swing.JComboBox" name="cbbkhoa">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="1">
+                <StringItem index="0" value="Ch&#x1ecd;n"/>
+              </StringArray>
             </Property>
           </Properties>
           <AuxValues>
@@ -590,7 +609,9 @@
         <Component class="javax.swing.JComboBox" name="cbblop">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="1">
+                <StringItem index="0" value="Ch&#x1ecd;n"/>
+              </StringArray>
             </Property>
           </Properties>
           <AuxValues>

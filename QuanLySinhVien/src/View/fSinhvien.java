@@ -9,16 +9,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public final class fSinhvien extends javax.swing.JFrame {
-    
+
     Random rd = new Random();
     ArrayList<DTO_SinhVien> arrayList = new ArrayList<>();
     BLL_SinhVien bll = new BLL_SinhVien();
     DTO_SinhVien dto = new DTO_SinhVien();
     private int maphongban;
-    
+
     public fSinhvien() {
         initComponents();
         LoadSinhvien();
@@ -26,7 +27,7 @@ public final class fSinhvien extends javax.swing.JFrame {
         combolop();
         Disable();
     }
-    
+
     private void Enable() {
         cbHocvan.setEnabled(true);
         cbPhongban.setEnabled(true);
@@ -41,7 +42,7 @@ public final class fSinhvien extends javax.swing.JFrame {
         datebirth.setEnabled(true);
         inschool.setEnabled(true);
     }
-    
+
     private void Disable() {
         cbbkhoa.setEnabled(false);
         cbHocvan.setEnabled(false);
@@ -57,7 +58,7 @@ public final class fSinhvien extends javax.swing.JFrame {
         datebirth.setEnabled(false);
         inschool.setEnabled(false);
     }
-    
+
     public void LoadSinhvien() {
         String header[] = {"MSSV", "Họ tên ", "Lớp", "Khoa", "Học vấn", "Mât khẩu", "Ngày vào trường ", "Ngày sinh", " Số điện thoại", "Email", "Địa chỉ", " Thân nhân", "Quan hệ", "Số điện thoại thân nhân"};
         DefaultTableModel model = new DefaultTableModel(header, 0);
@@ -86,7 +87,7 @@ public final class fSinhvien extends javax.swing.JFrame {
         tablesinhvien.getTableHeader().setResizingAllowed(false);
         tablesinhvien.getTableHeader().setReorderingAllowed(false);
     }
-    
+
     private void initalMSSV() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yy");
         String mssv = dateFormat.format(Calendar.getInstance().getTime());
@@ -115,10 +116,11 @@ public final class fSinhvien extends javax.swing.JFrame {
         tablesinhvien = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         BTNADD = new javax.swing.JButton();
-        btnedit = new javax.swing.JButton();
+        btnupdate = new javax.swing.JButton();
         btnxoa = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnreset = new javax.swing.JButton();
         btnsave = new javax.swing.JButton();
+        btnedit = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -174,7 +176,7 @@ public final class fSinhvien extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1469, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,7 +196,12 @@ public final class fSinhvien extends javax.swing.JFrame {
             }
         });
 
-        btnedit.setText("Sửa");
+        btnupdate.setText("Cập nhật");
+        btnupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnupdateActionPerformed(evt);
+            }
+        });
 
         btnxoa.setText("Xóa");
         btnxoa.addActionListener(new java.awt.event.ActionListener() {
@@ -203,12 +210,24 @@ public final class fSinhvien extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Làm lại");
+        btnreset.setText("Làm lại");
+        btnreset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnresetActionPerformed(evt);
+            }
+        });
 
         btnsave.setText("Lưu");
         btnsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsaveActionPerformed(evt);
+            }
+        });
+
+        btnedit.setText("Sửa");
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
             }
         });
 
@@ -219,17 +238,16 @@ public final class fSinhvien extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnxoa, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnsave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(BTNADD)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnxoa, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BTNADD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnedit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(113, 113, 113)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnupdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnsave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnreset, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,13 +255,15 @@ public final class fSinhvien extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNADD)
-                    .addComponent(btnxoa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnedit)
-                    .addComponent(jButton4)
                     .addComponent(btnsave))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnupdate)
+                    .addComponent(btnedit))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnreset)
+                    .addComponent(btnxoa)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin chi tiết", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(153, 153, 0))); // NOI18N
@@ -279,7 +299,7 @@ public final class fSinhvien extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 153, 51));
-        jLabel8.setText("Phong ban");
+        jLabel8.setText("Phòng ban");
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 153, 51));
@@ -292,6 +312,8 @@ public final class fSinhvien extends javax.swing.JFrame {
         txbmssv.setEditable(false);
 
         datebirth.setDateFormatString("dd/MM/yyyy");
+
+        cbbkhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn" }));
 
         jLabel13.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 153, 51));
@@ -310,6 +332,8 @@ public final class fSinhvien extends javax.swing.JFrame {
         jLabel16.setText("SDT");
 
         inschool.setDateFormatString("dd/MM/yyyy");
+
+        cbblop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn" }));
 
         cbPhongban.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn" }));
         cbPhongban.addActionListener(new java.awt.event.ActionListener() {
@@ -489,21 +513,21 @@ public final class fSinhvien extends javax.swing.JFrame {
             cbbkhoa.addItem(s);
         }
     }
-    
+
     private void combolop() {
         HashMap<String, Integer> map1 = bll.fillLopMap();
         for (String s : map1.keySet()) {
             cbblop.addItem(s);
         }
     }
-    
+
     private void combophongban() {
         HashMap<String, Integer> map = bll.loadPhongban();
         for (String s : map.keySet()) {
             cbPhongban.addItem(s);
         }
     }
-    
+
 
     private void insertStudent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertStudent
         txbhoten.requestFocus();
@@ -513,7 +537,7 @@ public final class fSinhvien extends javax.swing.JFrame {
         txbquanhe.setText("");
         txbsdtthanhan.setText("");
         txbtenthannhan.setText("");
-        btnedit.setEnabled(false);
+        btnupdate.setEnabled(false);
         btnxoa.setEnabled(false);
         Enable();
         initalMSSV();
@@ -544,33 +568,38 @@ public final class fSinhvien extends javax.swing.JFrame {
             Date birthday = format.parse(strBirthday);
             Date atschool = format.parse(strNgayvaotruong);
             dto.setDate(new java.sql.Date(birthday.getTime()));
+            dto.setPass(format.format(birthday).replaceAll("/", ""));
+            dto.setNgayvaotruong(new java.sql.Date(atschool.getTime()));
             dto.setEmail(txbemail.getText());
             dto.setDiachi(txbdiachi.getText());
-            dto.setPass(format.format(birthday).replaceAll("/", ""));
             dto.setMakhoa(Integer.parseInt(makhoa.get(cbbkhoa.getSelectedItem().toString()).toString()));
             dto.setMalop(Integer.parseInt(map1.get(cbblop.getSelectedItem().toString()).toString()));
             dto.setHocvan(cbHocvan.getSelectedItem().toString());
             dto.setMaphongban(Integer.parseInt(map_phongban.get(cbPhongban.getSelectedItem().toString()).toString()));
             dto.setRole(2);
-            dto.setNgayvaotruong(new java.sql.Date(atschool.getTime()));
             dto.setTenthannhan(txbtenthannhan.getText());
             dto.setQuanhe(txbquanhe.getText());
             dto.setSdtthannhan(txbsdtthanhan.getText());
             dto.setMathannhan(dto.getMssv());
-        } catch (NumberFormatException | ParseException e) {
-            System.err.println(e);
-        }
-        
-        int result_sinhvien = bll.insertSinhVien(dto.getMssv(), dto.getHoten(), dto.getSdt(), dto.getDate(), dto.getEmail(), dto.getDiachi(), dto.getPass(), dto.getHocvan(), dto.getMakhoa(), dto.getMalop(), dto.getMaphongban(), dto.getRole(), dto.getNgayvaotruong());
-        
-        int result_thannhan = bll.insertThanNhan(dto.getTenthannhan(), dto.getSdtthannhan(), dto.getQuanhe(), dto.getMathannhan());
-        if (result_sinhvien != 0) {
-            if (result_thannhan != 0) {
-                System.out.println("OK");
-                LoadSinhvien();
+            if (dto.getHoten().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên sinh viên không được bỏ trống ");
+                txbhoten.requestFocus();
+            } else if (dto.getTenthannhan().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên thân nhân không được bỏ trống ");
+            } else if (dto.getDate() == null) {
+                JOptionPane.showMessageDialog(this, " Chưa chọn các trường ngày ");
+            } else if (dto.getNgayvaotruong() == null) {
+                JOptionPane.showMessageDialog(this, " Chưa chọn các trường ngày ");
+            } else {
+                int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới sinh viên này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    bll.insertSinhVien(dto.getMssv(), dto.getHoten(), dto.getSdt(), dto.getDate(), dto.getEmail(), dto.getDiachi(), dto.getPass(), dto.getHocvan(), dto.getMakhoa(), dto.getMalop(), dto.getMaphongban(), dto.getRole(), dto.getNgayvaotruong());
+                    bll.insertThanNhan(dto.getTenthannhan(), dto.getSdtthannhan(), dto.getQuanhe(), dto.getMathannhan());
+                    LoadSinhvien();
+                }
             }
-        } else {
-            System.err.println("NOT OK");
+        } catch (NumberFormatException | ParseException ex) {
+            JOptionPane.showMessageDialog(this, " Chưa nhập đủ các trường còn thiều ");
         }
     }//GEN-LAST:event_btnsaveActionPerformed
 
@@ -585,21 +614,102 @@ public final class fSinhvien extends javax.swing.JFrame {
             cbHocvan.setSelectedItem(tablesinhvien.getValueAt(i, 4).toString());
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tablesinhvien.getValueAt(i, 7).toString());
             datebirth.setDate(date);
-            Date ne = new SimpleDateFormat("yyy-MM-dd").parse(tablesinhvien.getValueAt(i, 8).toString());
+            Date ne = new SimpleDateFormat("yyy-MM-dd").parse(tablesinhvien.getValueAt(i, 6).toString());
             inschool.setDate(ne);
+            txbsdt.setText(tablesinhvien.getValueAt(i, 8).toString());
+            txbemail.setText(tablesinhvien.getValueAt(i, 9).toString());
+            txbdiachi.setText(tablesinhvien.getValueAt(i, 10).toString());
+            txbtenthannhan.setText(tablesinhvien.getValueAt(i, 11).toString());
+            txbquanhe.setText(tablesinhvien.getValueAt(i, 12).toString());
+            txbsdtthanhan.setText(tablesinhvien.getValueAt(i, 13).toString());
         } catch (ParseException e) {
         }
     }//GEN-LAST:event_tablesinhvienMouseClicked
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
         dto.setMssv(Integer.parseInt(txbmssv.getText()));
-        bll.DeleteSV(dto.getMssv());
-        LoadSinhvien();
-        
+        int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn xóa sinh viên này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            bll.DeleteSV(dto.getMssv());
+            LoadSinhvien();
+        } else {
+            JOptionPane.showMessageDialog(this, " Xóa không thành công ");
+        }
+
     }//GEN-LAST:event_btnxoaActionPerformed
-    
+
+    private void btnresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresetActionPerformed
+        initalMSSV();
+        Enable();
+        datebirth.getDate();
+        txbhoten.requestFocus();
+        txbhoten.setText("");
+        txbdiachi.setText("");
+        txbemail.setText("");
+        txbquanhe.setText("");
+        txbsdtthanhan.setText("");
+        txbtenthannhan.setText("");
+        btnupdate.setEnabled(false);
+        btnxoa.setEnabled(false);
+    }//GEN-LAST:event_btnresetActionPerformed
+
+    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+        try {
+            HashMap<String, Integer> map_phongban = bll.loadPhongban();
+            HashMap<String, Integer> makhoa = bll.fillcombo(maphongban);
+            HashMap<String, Integer> map1 = bll.fillLopMap();
+            dto.setMssv(Integer.parseInt(txbmssv.getText()));
+            dto.setHoten(txbhoten.getText());
+            dto.setSdt(txbsdt.getText());
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String strBirthday = format.format(datebirth.getDate());
+            String strNgayvaotruong = format.format(inschool.getDate());
+            Date birthday = format.parse(strBirthday);
+            Date atschool = format.parse(strNgayvaotruong);
+            dto.setDate(new java.sql.Date(birthday.getTime()));
+            dto.setPass(format.format(birthday).replaceAll("/", ""));
+            dto.setNgayvaotruong(new java.sql.Date(atschool.getTime()));
+            dto.setEmail(txbemail.getText());
+            dto.setDiachi(txbdiachi.getText());
+            dto.setMakhoa(Integer.parseInt(makhoa.get(cbbkhoa.getSelectedItem().toString()).toString()));
+            dto.setMalop(Integer.parseInt(map1.get(cbblop.getSelectedItem().toString()).toString()));
+            dto.setHocvan(cbHocvan.getSelectedItem().toString());
+            dto.setMaphongban(Integer.parseInt(map_phongban.get(cbPhongban.getSelectedItem().toString()).toString()));
+            dto.setRole(2);
+            dto.setTenthannhan(txbtenthannhan.getText());
+            dto.setQuanhe(txbquanhe.getText());
+            dto.setSdtthannhan(txbsdtthanhan.getText());
+            dto.setMathannhan(dto.getMssv());
+            if (dto.getHoten().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên sinh viên không được bỏ trống ");
+                txbhoten.requestFocus();
+            } else if (dto.getTenthannhan().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên thân nhân không được bỏ trống ");
+            } else if (dto.getDate() == null) {
+                JOptionPane.showMessageDialog(this, " Chưa chọn các trường ngày ");
+            } else if (dto.getNgayvaotruong() == null) {
+                JOptionPane.showMessageDialog(this, " Chưa chọn các trường ngày ");
+            } else {
+                int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn cập nhật mới sinh viên này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    bll.UpdateSV(dto.getHoten(), dto.getSdt(), dto.getDate(), dto.getEmail(), dto.getDiachi(), dto.getPass(), dto.getHocvan(), dto.getMakhoa(), dto.getMalop(), dto.getMaphongban(), dto.getRole(), dto.getNgayvaotruong(), dto.getMssv());
+                    bll.UpdateThanNhan(dto.getTenthannhan(), dto.getSdtthannhan(), dto.getQuanhe(), dto.getMathannhan());
+                    LoadSinhvien();
+                }
+            }
+        } catch (NumberFormatException | ParseException ex) {
+            JOptionPane.showMessageDialog(this, " Chưa nhập đủ các trường còn thiều ");
+        }
+    }//GEN-LAST:event_btnupdateActionPerformed
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+       Enable();
+       cbbkhoa.setSelectedItem("Chọn");
+       
+    }//GEN-LAST:event_btneditActionPerformed
+
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(() -> {
             new fSinhvien().setVisible(true);
         });
@@ -608,7 +718,9 @@ public final class fSinhvien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNADD;
     private javax.swing.JButton btnedit;
+    private javax.swing.JButton btnreset;
     private javax.swing.JButton btnsave;
+    private javax.swing.JButton btnupdate;
     private javax.swing.JButton btnxoa;
     private javax.swing.JComboBox<String> cbHocvan;
     private javax.swing.JComboBox<String> cbPhongban;
@@ -616,7 +728,6 @@ public final class fSinhvien extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbblop;
     private com.toedter.calendar.JDateChooser datebirth;
     private com.toedter.calendar.JDateChooser inschool;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
