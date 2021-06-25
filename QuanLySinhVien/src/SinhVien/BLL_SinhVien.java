@@ -33,4 +33,8 @@ public class BLL_SinhVien {
     public HashMap<String, Integer> fillLopMap() {
         return dal.fillLopMap();
     }
+    
+    public int DeleteSV(int mssv) {
+        return  dal.DeleteSV(mssv);
+    }
 }

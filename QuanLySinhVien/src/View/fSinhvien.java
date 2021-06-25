@@ -9,27 +9,24 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public final class fSinhvien extends javax.swing.JFrame {
-
+    
     Random rd = new Random();
     ArrayList<DTO_SinhVien> arrayList = new ArrayList<>();
     BLL_SinhVien bll = new BLL_SinhVien();
     DTO_SinhVien dto = new DTO_SinhVien();
     private int maphongban;
-
+    
     public fSinhvien() {
         initComponents();
-        initalMSSV();
         LoadSinhvien();
         combophongban();
         combolop();
         Disable();
     }
-
+    
     private void Enable() {
         cbHocvan.setEnabled(true);
         cbPhongban.setEnabled(true);
@@ -44,7 +41,7 @@ public final class fSinhvien extends javax.swing.JFrame {
         datebirth.setEnabled(true);
         inschool.setEnabled(true);
     }
-
+    
     private void Disable() {
         cbbkhoa.setEnabled(false);
         cbHocvan.setEnabled(false);
@@ -60,7 +57,7 @@ public final class fSinhvien extends javax.swing.JFrame {
         datebirth.setEnabled(false);
         inschool.setEnabled(false);
     }
-
+    
     public void LoadSinhvien() {
         String header[] = {"MSSV", "Họ tên ", "Lớp", "Khoa", "Học vấn", "Mât khẩu", "Ngày vào trường ", "Ngày sinh", " Số điện thoại", "Email", "Địa chỉ", " Thân nhân", "Quan hệ", "Số điện thoại thân nhân"};
         DefaultTableModel model = new DefaultTableModel(header, 0);
@@ -89,7 +86,7 @@ public final class fSinhvien extends javax.swing.JFrame {
         tablesinhvien.getTableHeader().setResizingAllowed(false);
         tablesinhvien.getTableHeader().setReorderingAllowed(false);
     }
-
+    
     private void initalMSSV() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yy");
         String mssv = dateFormat.format(Calendar.getInstance().getTime());
@@ -109,7 +106,6 @@ public final class fSinhvien extends javax.swing.JFrame {
 //        }
 //        return password;
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -165,6 +161,11 @@ public final class fSinhvien extends javax.swing.JFrame {
 
             }
         ));
+        tablesinhvien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablesinhvienMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablesinhvien);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -196,6 +197,11 @@ public final class fSinhvien extends javax.swing.JFrame {
         btnedit.setText("Sửa");
 
         btnxoa.setText("Xóa");
+        btnxoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxoaActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Làm lại");
 
@@ -483,21 +489,21 @@ public final class fSinhvien extends javax.swing.JFrame {
             cbbkhoa.addItem(s);
         }
     }
-
+    
     private void combolop() {
         HashMap<String, Integer> map1 = bll.fillLopMap();
         for (String s : map1.keySet()) {
             cbblop.addItem(s);
         }
     }
-
+    
     private void combophongban() {
         HashMap<String, Integer> map = bll.loadPhongban();
         for (String s : map.keySet()) {
             cbPhongban.addItem(s);
         }
     }
-
+    
 
     private void insertStudent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertStudent
         txbhoten.requestFocus();
@@ -510,6 +516,7 @@ public final class fSinhvien extends javax.swing.JFrame {
         btnedit.setEnabled(false);
         btnxoa.setEnabled(false);
         Enable();
+        initalMSSV();
     }//GEN-LAST:event_insertStudent
 
     private void getPhongban(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPhongban
@@ -553,9 +560,9 @@ public final class fSinhvien extends javax.swing.JFrame {
         } catch (NumberFormatException | ParseException e) {
             System.err.println(e);
         }
-
+        
         int result_sinhvien = bll.insertSinhVien(dto.getMssv(), dto.getHoten(), dto.getSdt(), dto.getDate(), dto.getEmail(), dto.getDiachi(), dto.getPass(), dto.getHocvan(), dto.getMakhoa(), dto.getMalop(), dto.getMaphongban(), dto.getRole(), dto.getNgayvaotruong());
-
+        
         int result_thannhan = bll.insertThanNhan(dto.getTenthannhan(), dto.getSdtthannhan(), dto.getQuanhe(), dto.getMathannhan());
         if (result_sinhvien != 0) {
             if (result_thannhan != 0) {
@@ -567,8 +574,32 @@ public final class fSinhvien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnsaveActionPerformed
 
-    public static void main(String args[]) {
+    private void tablesinhvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablesinhvienMouseClicked
+        try {
+            btnxoa.setEnabled(true);
+            int i = tablesinhvien.getSelectedRow();
+            txbmssv.setText(tablesinhvien.getValueAt(i, 0).toString());
+            txbhoten.setText(tablesinhvien.getValueAt(i, 1).toString());
+            cbblop.setSelectedItem(tablesinhvien.getValueAt(i, 2).toString());
+            cbbkhoa.setSelectedItem(tablesinhvien.getValueAt(i, 3).toString());
+            cbHocvan.setSelectedItem(tablesinhvien.getValueAt(i, 4).toString());
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tablesinhvien.getValueAt(i, 7).toString());
+            datebirth.setDate(date);
+            Date ne = new SimpleDateFormat("yyy-MM-dd").parse(tablesinhvien.getValueAt(i, 8).toString());
+            inschool.setDate(ne);
+        } catch (ParseException e) {
+        }
+    }//GEN-LAST:event_tablesinhvienMouseClicked
 
+    private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
+        dto.setMssv(Integer.parseInt(txbmssv.getText()));
+        bll.DeleteSV(dto.getMssv());
+        LoadSinhvien();
+        
+    }//GEN-LAST:event_btnxoaActionPerformed
+    
+    public static void main(String args[]) {
+        
         java.awt.EventQueue.invokeLater(() -> {
             new fSinhvien().setVisible(true);
         });
