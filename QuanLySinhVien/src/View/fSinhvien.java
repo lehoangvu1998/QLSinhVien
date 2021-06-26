@@ -539,6 +539,7 @@ public final class fSinhvien extends javax.swing.JFrame {
         txbtenthannhan.setText("");
         btnupdate.setEnabled(false);
         btnxoa.setEnabled(false);
+        btnedit.setEnabled(false);
         Enable();
         initalMSSV();
     }//GEN-LAST:event_insertStudent
