@@ -1,9 +1,114 @@
 package View;
 
-public class fGiangVien extends javax.swing.JFrame {
+import Giangvien.BLL_GV;
+import Giangvien.DAL_GV;
+import Giangvien.DTO_GV;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+public final class fGiangVien extends javax.swing.JFrame {
+
+    BLL_GV bll = new BLL_GV();
+    ArrayList<DTO_GV> array = new ArrayList<>();
+    DAL_GV dal = new DAL_GV();
+    DTO_GV dto = new DTO_GV();
+    Random rd = new Random();
+    public static int maphongban;
 
     public fGiangVien() {
         initComponents();
+        LoadGiangvien();
+        combophongban();
+        Disable();
+
+    }
+
+    private void Enable() {
+        cbHocvan.setEnabled(true);
+        cbPhongban.setEnabled(true);
+        txbhoten.setEditable(true);
+        txbdiachi.setEditable(true);
+        txbemail.setEditable(true);
+        txbquanhe.setEditable(true);
+        txbsdt.setEditable(true);
+        txbsdtthanhan.setEditable(true);
+        txbtenthannhan.setEditable(true);
+        datebirth.setEnabled(true);
+        inschool.setEnabled(true);
+    }
+
+    private void Disable() {
+        cbbkhoa.setEnabled(false);
+        cbHocvan.setEnabled(false);
+        cbPhongban.setEnabled(false);
+        txbhoten.setEditable(false);
+        txbdiachi.setEditable(false);
+        txbemail.setEditable(false);
+        txbquanhe.setEditable(false);
+        txbsdt.setEditable(false);
+        txbsdtthanhan.setEditable(false);
+        txbtenthannhan.setEditable(false);
+        datebirth.setEnabled(false);
+        inschool.setEnabled(false);
+        txbmsnv.setEnabled(false);
+    }
+
+    public void LoadGiangvien() {
+        String header[] = {"MSSV", "Họ tên ", "Khoa", "Học vấn", "Mât khẩu", "Ngày vào trường ", "Ngày sinh", " Số điện thoại", "Email", "Địa chỉ", " Thân nhân", "Quan hệ", "Số điện thoại thân nhân"};
+        DefaultTableModel model = new DefaultTableModel(header, 0);
+        array = bll.GetListGiangVien();
+        for (int i = 0; i < array.size(); i++) {
+            dto = array.get(i);
+            int a = dto.getMsnv();
+            String b = dto.getHoten();
+            String d = dto.getTenkhoa();
+            String e = dto.getHocvan();
+            String q = dto.getPass();
+            Date f = dto.getNgayvaotruong();
+            Date g = dto.getDate();
+            String h = dto.getSdt();
+            String k = dto.getEmail();
+            String w = dto.getDiachi();
+            String r = dto.getTenthannhan();
+            String t = dto.getQuanhe();
+            String y = dto.getSdtthannhan();
+            Object[] row = {a, b, d, e, q, f, g, h, k, w, r, t, y};
+            model.addRow(row);
+        }
+        tablegiangvien.setModel(model);
+        tablegiangvien.setDefaultEditor(Object.class, null);
+        tablegiangvien.getTableHeader().setResizingAllowed(false);
+        tablegiangvien.getTableHeader().setReorderingAllowed(false);
+    }
+
+    private void initalMSGV() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yy");
+        String mssv = dateFormat.format(Calendar.getInstance().getTime());
+        int random = rd.nextInt(100000) + 900000;
+        txbmsnv.setText(mssv + random);
+    }
+
+    private void combokhoa() {
+        HashMap<String, Integer> map_phongban = bll.loadPhongban();
+        maphongban = Integer.parseInt(map_phongban.get(cbPhongban.getSelectedItem().toString()).toString());
+        HashMap<String, Integer> map = bll.fillcombo(maphongban);
+        for (String s : map.keySet()) {
+            cbbkhoa.addItem(s);
+        }
+    }
+
+    private void combophongban() {
+        HashMap<String, Integer> map = bll.loadPhongban();
+        for (String s : map.keySet()) {
+            cbPhongban.addItem(s);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -12,7 +117,7 @@ public class fGiangVien extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablesinhvien = new javax.swing.JTable();
+        tablegiangvien = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -52,7 +157,7 @@ public class fGiangVien extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách giảng viên", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Times New Roman", 1, 24), new java.awt.Color(0, 0, 204))); // NOI18N
 
-        tablesinhvien.setModel(new javax.swing.table.DefaultTableModel(
+        tablegiangvien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -60,7 +165,7 @@ public class fGiangVien extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tablesinhvien);
+        jScrollPane1.setViewportView(tablegiangvien);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,8 +248,13 @@ public class fGiangVien extends javax.swing.JFrame {
         inschool.setDateFormatString("dd/MM/yyyy");
 
         cbPhongban.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn" }));
+        cbPhongban.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getKHOA(evt);
+            }
+        });
 
-        cbHocvan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sinh viên" }));
+        cbHocvan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Giảng viên" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -271,6 +381,11 @@ public class fGiangVien extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(255, 0, 0))); // NOI18N
 
         btnadd.setText("Thêm");
+        btnadd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddActionPerformed(evt);
+            }
+        });
 
         btnupdate.setText("Cập nhật");
 
@@ -279,6 +394,11 @@ public class fGiangVien extends javax.swing.JFrame {
         btnreset.setText("Làm lại");
 
         btnsave.setText("Lưu");
+        btnsave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsaveActionPerformed(evt);
+            }
+        });
 
         btnedit.setText("Sửa");
 
@@ -346,7 +466,73 @@ public class fGiangVien extends javax.swing.JFrame {
         jPanel1.getAccessibleContext().setAccessibleName("Danh sách Giảng viên");
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void getKHOA(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getKHOA
+        if (cbPhongban.getSelectedIndex() == 0) {
+            cbbkhoa.setEnabled(false);
+            cbbkhoa.removeAllItems();
+        } else {
+            cbbkhoa.setEnabled(true);
+            cbbkhoa.removeAllItems();
+            combokhoa();
+        }
+    }//GEN-LAST:event_getKHOA
+
+    private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
+        Enable();
+        initalMSGV();
+        txbhoten.requestFocus();
+    }//GEN-LAST:event_btnaddActionPerformed
+
+    private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
+        try {
+            HashMap<String, Integer> map_phongban = bll.loadPhongban();
+            HashMap<String, Integer> makhoa = bll.fillcombo(maphongban);
+            dto.setMsnv(Integer.parseInt(txbmsnv.getText()));
+            dto.setHoten(txbhoten.getText());
+            dto.setSdt(txbsdt.getText());
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String strBirthday = format.format(datebirth.getDate());
+            String strNgayvaotruong = format.format(inschool.getDate());
+            Date birthday = format.parse(strBirthday);
+            Date atschool = format.parse(strNgayvaotruong);
+            dto.setDate(new java.sql.Date(birthday.getTime()));
+            dto.setPass(format.format(birthday).replaceAll("/", ""));
+            dto.setNgayvaotruong(new java.sql.Date(atschool.getTime()));
+            dto.setEmail(txbemail.getText());
+            dto.setDiachi(txbdiachi.getText());
+            dto.setMakhoa(Integer.parseInt(makhoa.get(cbbkhoa.getSelectedItem().toString()).toString()));
+            dto.setMalop(null);
+            dto.setHocvan(cbHocvan.getSelectedItem().toString());
+            dto.setMaphongban(Integer.parseInt(map_phongban.get(cbPhongban.getSelectedItem().toString()).toString()));
+            dto.setRole(1);
+            dto.setTenthannhan(txbtenthannhan.getText());
+            dto.setQuanhe(txbquanhe.getText());
+            dto.setSdtthannhan(txbsdtthanhan.getText());
+            dto.setMathannhan(dto.getMsnv());
+            if (dto.getHoten().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên sinh viên không được bỏ trống ");
+                txbhoten.requestFocus();
+            } else if (dto.getTenthannhan().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên thân nhân không được bỏ trống ");
+            } else if (dto.getDate() == null) {
+                JOptionPane.showMessageDialog(this, " Chưa chọn các trường ngày ");
+            } else if (dto.getNgayvaotruong() == null) {
+                JOptionPane.showMessageDialog(this, " Chưa chọn các trường ngày ");
+            } else {
+                int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn thêm mới sinh viên này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    bll.insertGiangVien(dto.getMsnv(), dto.getHoten(), dto.getSdt(), dto.getDate(), dto.getEmail(), dto.getDiachi(), dto.getPass(), dto.getHocvan(), dto.getMakhoa(), dto.getMalop(), dto.getMaphongban(), dto.getRole(), dto.getNgayvaotruong());
+                    bll.insertThanNhan(dto.getTenthannhan(), dto.getSdtthannhan(), dto.getQuanhe(), dto.getMathannhan());
+                   LoadGiangvien();
+                }
+            }
+        } catch (NumberFormatException | ParseException ex) {
+            JOptionPane.showMessageDialog(this, " Chưa nhập đủ các trường còn thiều ");
+        }
+    }//GEN-LAST:event_btnsaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -410,7 +596,7 @@ public class fGiangVien extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablesinhvien;
+    private javax.swing.JTable tablegiangvien;
     private javax.swing.JTextField txbdiachi;
     private javax.swing.JTextField txbemail;
     private javax.swing.JTextField txbhoten;

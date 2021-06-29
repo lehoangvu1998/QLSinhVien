@@ -2,10 +2,11 @@ package SinhVien;
 
 import java.sql.Date;
 
-
 public class DTO_SinhVien {
 
     private int mssv, mathannhan, malop, makhoa, maphongban, role;
+    private String hoten, sdt, email, diachi, pass, hocvan, tenkhoa, tenlop, sdtthannhan, quanhe, tenthannhan;
+    private Date date, ngayvaotruong;
 
     public int getRole() {
         return role;
@@ -14,8 +15,6 @@ public class DTO_SinhVien {
     public void setRole(int role) {
         this.role = role;
     }
-    private String hoten, sdt, email, diachi, pass, hocvan, tenkhoa, tenlop, sdtthannhan, quanhe, tenthannhan;
-    private Date date, ngayvaotruong;
 
     public int getMssv() {
         return mssv;
@@ -160,5 +159,5 @@ public class DTO_SinhVien {
     public void setNgayvaotruong(Date ngayvaotruong) {
         this.ngayvaotruong = ngayvaotruong;
     }
-    
+
 }

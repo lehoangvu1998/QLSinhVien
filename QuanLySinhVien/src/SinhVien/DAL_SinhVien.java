@@ -109,7 +109,6 @@ public class DAL_SinhVien {
     public int insertSinhVien(int mssv, String hoten, String dienthoai, Date ngaysinh, String email, String diachi, String matkhau, String hocvan, int makhoa, int malop, int maphongban, int role, Date ngayvaotruong) {
         int result = 0;
         String query_sinhvien = "insert into USERS (MAUSERS, HOTEN, SDT, NGAYSINH, EMAIL, DIACHI, PASS, HOCVAN, MAKHOA, MALOP, MAPHONGBAN, ROLE, NGAYVAOTRUONG) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        //String query_sinhvien = "insert USERS (MAUSERS, HOTEN, SDT, NGAYSINH, EMAIL, DIACHI, PASS, HOCVAN, MAKHOA, MALOP, MAPHONGBAN, ROLE, NGAYVAOTRUONG) values (124, N'Nguyễn Văn A', '021312333', '24/03/1998', 'abc@gmail.com','TP.HCM', '24031998', N'Sinh viên', null, null, null, 2, '24/03/2021')";
         try {
             db = new DatabaseConnection();
             con = db.getConnection();
