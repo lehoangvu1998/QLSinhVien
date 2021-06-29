@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
 public class DatabaseConnection {
@@ -42,25 +41,5 @@ public class DatabaseConnection {
             throw new NullPointerException("Kết nối không thành công");
         }
         return con;
-    }
-
-    public void ExcuteQueryDB(String cauTruyVanSQL) {
-        try {
-            Statement stmt = con.createStatement();
-            stmt.executeUpdate(cauTruyVanSQL);
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-    }
-
-    public ResultSet ExcuteQueryGetTable(String cauTruyVanSQL) {
-        try {
-            Statement stmt = con.createStatement();
-            rs = stmt.executeQuery(cauTruyVanSQL);
-            return rs;
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
-        return null;
     }
 }
