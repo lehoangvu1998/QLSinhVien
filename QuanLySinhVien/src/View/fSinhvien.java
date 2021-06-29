@@ -645,12 +645,16 @@ public final class fSinhvien extends javax.swing.JFrame {
         datebirth.getDate();
         txbhoten.requestFocus();
         txbhoten.setText("");
+        txbsdt.setText("");
         txbdiachi.setText("");
         txbemail.setText("");
         txbquanhe.setText("");
         txbsdtthanhan.setText("");
         txbtenthannhan.setText("");
         btnupdate.setEnabled(false);
+        Date date = new Date();
+        datebirth.setDate(date);
+        inschool.setDate(date);
         btnxoa.setEnabled(false);
     }//GEN-LAST:event_btnresetActionPerformed
 
@@ -704,9 +708,11 @@ public final class fSinhvien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnupdateActionPerformed
 
     private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
-       Enable();
-       cbbkhoa.setSelectedItem("Chọn");
-       
+        Enable();
+        cbbkhoa.setSelectedItem("Chọn");
+        BTNADD.setEnabled(false);
+        btnsave.setEnabled(false);
+
     }//GEN-LAST:event_btneditActionPerformed
 
     public static void main(String args[]) {
