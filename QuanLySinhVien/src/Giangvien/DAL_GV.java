@@ -163,7 +163,7 @@ public class DAL_GV {
         return result;
     }
 
-    public int DeleteSV(int msnv) {
+    public int DeletGV(int msnv) {
         int result = 0;
         String sl = " DELETE FROM USERS WHERE MAUSERS = ?";
         try {
@@ -177,9 +177,9 @@ public class DAL_GV {
         return result;
     }
 
-    public int UpdateGV(String hoten, String sdt, Date ngaysinh, String email, String diachi, String matkhau, String hocvan, int makhoa, int malop, int maphongban, int role, Date ngayvaotruong, int msnv) {
+    public int UpdateGV(String hoten, String sdt, Date ngaysinh, String email, String diachi, String matkhau, String hocvan, int makhoa, int maphongban, int role, Date ngayvaotruong, int msnv) {
         int result = 0;
-        String sql = " UPDATE USERS SET HOTEN = ?, SDT = ? , NGAYSINH= ?, EMAIL = ?, DIACHI = ?, PASS= ?, HOCVAN = ?, MAKHOA=?, MALOP =?, MAPHONGBAN = ?, ROLE = ?, NGAYVAOTRUONG =?   WHERE MAUSERS = ?";
+        String sql = " UPDATE USERS SET HOTEN = ?, SDT = ? , NGAYSINH= ?, EMAIL = ?, DIACHI = ?, PASS= ?, HOCVAN = ?, MAKHOA=?, MAPHONGBAN = ?, ROLE = ?, NGAYVAOTRUONG =?   WHERE MAUSERS = ?";
         try {
             db = new DatabaseConnection();
             con = db.getConnection();
@@ -192,11 +192,10 @@ public class DAL_GV {
             ps.setString(6, matkhau);
             ps.setString(7, hocvan);
             ps.setInt(8, makhoa);
-            ps.setInt(9, malop);
-            ps.setInt(10, maphongban);
-            ps.setInt(11, role);
-            ps.setDate(12, ngayvaotruong);
-            ps.setInt(13, msnv);
+            ps.setInt(9, maphongban);
+            ps.setInt(10, role);
+            ps.setDate(11, ngayvaotruong);
+            ps.setInt(12, msnv);
             result = ps.executeUpdate();
         } catch (SQLException e) {
         }

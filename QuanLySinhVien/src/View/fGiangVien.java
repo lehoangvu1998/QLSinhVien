@@ -165,6 +165,11 @@ public final class fGiangVien extends javax.swing.JFrame {
 
             }
         ));
+        tablegiangvien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablegiangvienMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablegiangvien);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -225,7 +230,7 @@ public final class fGiangVien extends javax.swing.JFrame {
 
         txbmsnv.setEditable(false);
 
-        datebirth.setDateFormatString("dd/MM/yyyy");
+        datebirth.setDateFormatString("dd-MM-yyyy");
 
         cbbkhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn" }));
 
@@ -245,7 +250,7 @@ public final class fGiangVien extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(0, 153, 51));
         jLabel16.setText("SDT");
 
-        inschool.setDateFormatString("dd/MM/yyyy");
+        inschool.setDateFormatString("dd-MM-yyyy");
 
         cbPhongban.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn" }));
         cbPhongban.addActionListener(new java.awt.event.ActionListener() {
@@ -388,10 +393,25 @@ public final class fGiangVien extends javax.swing.JFrame {
         });
 
         btnupdate.setText("Cập nhật");
+        btnupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnupdateActionPerformed(evt);
+            }
+        });
 
         btnxoa.setText("Xóa");
+        btnxoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxoaActionPerformed(evt);
+            }
+        });
 
         btnreset.setText("Làm lại");
+        btnreset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnresetActionPerformed(evt);
+            }
+        });
 
         btnsave.setText("Lưu");
         btnsave.addActionListener(new java.awt.event.ActionListener() {
@@ -401,6 +421,11 @@ public final class fGiangVien extends javax.swing.JFrame {
         });
 
         btnedit.setText("Sửa");
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -526,13 +551,118 @@ public final class fGiangVien extends javax.swing.JFrame {
                 if (result == JOptionPane.YES_OPTION) {
                     bll.insertGiangVien(dto.getMsnv(), dto.getHoten(), dto.getSdt(), dto.getDate(), dto.getEmail(), dto.getDiachi(), dto.getPass(), dto.getHocvan(), dto.getMakhoa(), dto.getMalop(), dto.getMaphongban(), dto.getRole(), dto.getNgayvaotruong());
                     bll.insertThanNhan(dto.getTenthannhan(), dto.getSdtthannhan(), dto.getQuanhe(), dto.getMathannhan());
-                   LoadGiangvien();
+                    LoadGiangvien();
                 }
             }
         } catch (NumberFormatException | ParseException ex) {
             JOptionPane.showMessageDialog(this, " Chưa nhập đủ các trường còn thiều ");
         }
     }//GEN-LAST:event_btnsaveActionPerformed
+
+    private void tablegiangvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablegiangvienMouseClicked
+        try {
+            btnxoa.setEnabled(true);
+            int i = tablegiangvien.getSelectedRow();
+            txbmsnv.setText(tablegiangvien.getValueAt(i, 0).toString());
+            txbhoten.setText(tablegiangvien.getValueAt(i, 1).toString());
+            cbbkhoa.setSelectedItem(tablegiangvien.getValueAt(i, 2));
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tablegiangvien.getValueAt(i, 6).toString());
+            datebirth.setDate(date);
+            Date ne = new SimpleDateFormat("yyyy-MM-dd").parse(tablegiangvien.getValueAt(i, 5).toString());
+            inschool.setDate(ne);
+            txbsdt.setText(tablegiangvien.getValueAt(i, 7).toString());
+            txbemail.setText(tablegiangvien.getValueAt(i, 8).toString());
+            txbdiachi.setText(tablegiangvien.getValueAt(i, 9).toString());
+            txbtenthannhan.setText(tablegiangvien.getValueAt(i, 10).toString());
+            txbquanhe.setText(tablegiangvien.getValueAt(i, 11).toString());
+            txbsdtthanhan.setText(tablegiangvien.getValueAt(i, 12).toString());
+        } catch (ParseException e) {
+        }
+    }//GEN-LAST:event_tablegiangvienMouseClicked
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        Enable();
+        btnadd.setVisible(false);
+        btnsave.setVisible(false);
+    }//GEN-LAST:event_btneditActionPerformed
+
+    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+         try {
+            HashMap<String, Integer> map_phongban = bll.loadPhongban();
+            HashMap<String, Integer> makhoa = bll.fillcombo(maphongban);
+            dto.setMsnv(Integer.parseInt(txbmsnv.getText()));
+            dto.setHoten(txbhoten.getText());
+            dto.setSdt(txbsdt.getText());
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String strBirthday = format.format(datebirth.getDate());
+            String strNgayvaotruong = format.format(inschool.getDate());
+            Date birthday = format.parse(strBirthday);
+            Date atschool = format.parse(strNgayvaotruong);
+            dto.setDate(new java.sql.Date(birthday.getTime()));
+            dto.setPass(format.format(birthday).replaceAll("/", ""));
+            dto.setNgayvaotruong(new java.sql.Date(atschool.getTime()));
+            dto.setEmail(txbemail.getText());
+            dto.setDiachi(txbdiachi.getText());
+            dto.setMakhoa(Integer.parseInt(makhoa.get(cbbkhoa.getSelectedItem().toString()).toString()));
+            dto.setMalop(null);
+            dto.setHocvan(cbHocvan.getSelectedItem().toString());
+            dto.setMaphongban(Integer.parseInt(map_phongban.get(cbPhongban.getSelectedItem().toString()).toString()));
+            dto.setRole(1);
+            dto.setTenthannhan(txbtenthannhan.getText());
+            dto.setQuanhe(txbquanhe.getText());
+            dto.setSdtthannhan(txbsdtthanhan.getText());
+            dto.setMathannhan(dto.getMsnv());
+            if (dto.getHoten().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên sinh viên không được bỏ trống ");
+                txbhoten.requestFocus();
+            } else if (dto.getTenthannhan().isEmpty()) {
+                JOptionPane.showMessageDialog(this, " Tên thân nhân không được bỏ trống ");
+            } else if (dto.getDate() == null) {
+                JOptionPane.showMessageDialog(this, " Chưa chọn các trường ngày ");
+            } else if (dto.getNgayvaotruong() == null) {
+                JOptionPane.showMessageDialog(this, " Chưa chọn các trường ngày ");
+            } else {
+                int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn cập nhật lại sinh viên này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    bll.UpdateGV(dto.getHoten(), dto.getSdt(), dto.getDate(), dto.getEmail(), dto.getDiachi(), dto.getPass(), dto.getHocvan(), dto.getMakhoa(), dto.getMaphongban(), dto.getRole(), dto.getNgayvaotruong(), dto.getMsnv());
+                    bll.UpdateThanNhan(dto.getTenthannhan(), dto.getSdtthannhan(), dto.getQuanhe(), dto.getMathannhan());
+                    LoadGiangvien();
+                }
+            }
+        } catch (NumberFormatException | ParseException ex) {
+            JOptionPane.showMessageDialog(this, " Chưa nhập đủ các trường còn thiều ");
+        }
+    }//GEN-LAST:event_btnupdateActionPerformed
+
+    private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
+           dto.setMsnv(Integer.parseInt(txbmsnv.getText()));
+        int result = JOptionPane.showConfirmDialog(this, " Bạn có chắc chắn xóa sinh viên này không ", "Thông báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            bll.DeleteGV(dto.getMsnv());
+            LoadGiangvien();
+        } else {
+            JOptionPane.showMessageDialog(this, " Xóa không thành công ");
+        }
+    }//GEN-LAST:event_btnxoaActionPerformed
+
+    private void btnresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresetActionPerformed
+        initalMSGV();
+        Enable();
+        datebirth.getDate();
+        txbhoten.requestFocus();
+        txbhoten.setText("");
+        txbsdt.setText("");
+        txbdiachi.setText("");
+        txbemail.setText("");
+        txbquanhe.setText("");
+        txbsdtthanhan.setText("");
+        txbtenthannhan.setText("");
+        btnupdate.setEnabled(false);
+        Date date = new Date();
+        datebirth.setDate(date);
+        inschool.setDate(date);
+        btnxoa.setEnabled(false);
+    }//GEN-LAST:event_btnresetActionPerformed
 
     /**
      * @param args the command line arguments

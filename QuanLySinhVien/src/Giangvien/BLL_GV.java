@@ -32,12 +32,12 @@ public class BLL_GV {
         return dal.insertThanNhan(hoten, sodienthoai, quanhe, mathannhan);
     }
 
-    public int DeleteSV(int msnv) {
-        return dal.DeleteSV(msnv);
+    public int DeleteGV(int msnv) {
+        return dal.DeletGV(msnv);
     }
 
-    public int UpdateGV(String hoten, String sdt, Date ngaysinh, String email, String diachi, String matkhau, String hocvan, int makhoa, int malop, int maphongban, int role, Date ngayvaotruong, int msnv) {
-        return dal.UpdateGV(hoten, sdt, ngaysinh, email, diachi, matkhau, hocvan, makhoa, malop, maphongban, role, ngayvaotruong, msnv);
+    public int UpdateGV(String hoten, String sdt, Date ngaysinh, String email, String diachi, String matkhau, String hocvan, int makhoa, int maphongban, int role, Date ngayvaotruong, int msnv) {
+        return dal.UpdateGV(hoten, sdt, ngaysinh, email, diachi, matkhau, hocvan, makhoa, maphongban, role, ngayvaotruong, msnv);
     }
 
     public int UpdateThanNhan(String hoten, String sodienthoai, String quanhe, int mathannhan) {

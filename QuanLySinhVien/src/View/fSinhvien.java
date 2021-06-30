@@ -342,7 +342,7 @@ public final class fSinhvien extends javax.swing.JFrame {
             }
         });
 
-        cbHocvan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sinh viên" }));
+        cbHocvan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn ", "Sinh viên" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -615,7 +615,7 @@ public final class fSinhvien extends javax.swing.JFrame {
             cbHocvan.setSelectedItem(tablesinhvien.getValueAt(i, 4).toString());
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tablesinhvien.getValueAt(i, 7).toString());
             datebirth.setDate(date);
-            Date ne = new SimpleDateFormat("yyy-MM-dd").parse(tablesinhvien.getValueAt(i, 6).toString());
+            Date ne = new SimpleDateFormat("yyyy-MM-dd").parse(tablesinhvien.getValueAt(i, 6).toString());
             inschool.setDate(ne);
             txbsdt.setText(tablesinhvien.getValueAt(i, 8).toString());
             txbemail.setText(tablesinhvien.getValueAt(i, 9).toString());
