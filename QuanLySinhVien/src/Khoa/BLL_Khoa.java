@@ -27,3 +27,4 @@ public class BLL_Khoa {
         return dal.Delete(makhoa);
     }
 }
+

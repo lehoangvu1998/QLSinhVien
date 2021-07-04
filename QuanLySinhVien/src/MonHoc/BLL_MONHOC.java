@@ -6,7 +6,6 @@ import java.util.HashMap;
 public class BLL_MONHOC {
 
     DAL_MONHOC dal = new DAL_MONHOC();
-
     public ArrayList<DTO_MONHOC> getLISTmONHOC() {
         return dal.getLISTmONHOC();
     }
